@@ -1,10 +1,4 @@
-@php
-
-// dd(backpack_theme_config('layout'));
-
-@endphp
-
-@extends('app')
+@extends('layouts.main_app')
 
 @section('content')
     <div class="container">

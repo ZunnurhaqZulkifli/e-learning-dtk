@@ -39,9 +39,9 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        if(Auth::user()->hasRole('admin')) {
-            backpack_auth()->logout();
-        }
+        // if(Auth::user()->hasRole('admin')) {
+        //     backpack_auth()->logout();
+        // }
 
         Auth::logout();
         $request->session()->invalidate();

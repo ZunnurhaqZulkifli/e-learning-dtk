@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        return view('public.dashboard');
+        return Inertia::render('Dashboard', [
+            'name' => 'John Doe',
+        ]);
     }
 }

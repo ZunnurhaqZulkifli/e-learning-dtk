@@ -1,3 +1,2 @@
 import './bootstrap';
-
-require('./components/HelloReact')
+// import '.../css/app.css';

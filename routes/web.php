@@ -1,10 +1,14 @@
 <?php
+
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
-Route::get('/', function () {
-    return view('front.dashboard');
-});
+Route::get('/', [DashboardController::class, 'index'])
+->middleware([HandlePrecognitiveRequests::class])
+->name('dashboard');
 
 Route::prefix('public')->middleware(
     ['auth']
