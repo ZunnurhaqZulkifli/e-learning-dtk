@@ -10,8 +10,11 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Dashboard', [
-            'name' => 'John Doe',
-        ]);
+        return Inertia::render('Dashboard');
+    }
+
+    public function aboutUs()
+    {
+        return Inertia::render('AboutUs');
     }
 }

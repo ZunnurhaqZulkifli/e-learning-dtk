@@ -6,9 +6,18 @@ use App\Http\Controllers\LoginController;
 use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
-Route::get('/', [DashboardController::class, 'index'])
-->middleware([HandlePrecognitiveRequests::class])
-->name('dashboard');
+
+// public routes
+Route::group(
+    [
+        // 'prefix' => '/',
+        'middleware' => HandlePrecognitiveRequests::class,
+    ],
+    function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/about-us', [DashboardController::class, 'aboutUs'])->name('about-us');
+    }
+);
 
 Route::prefix('public')->middleware(
     ['auth']

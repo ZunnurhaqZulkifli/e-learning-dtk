@@ -27,11 +27,11 @@ class LoginController extends Controller
             // If the user is an admin, redirect to the admin dashboard
             if ($check_if_admin) {
                 backpack_auth()->login(Auth::user());
-                return redirect(backpack_url('dashboard'));
+                return redirect('/admin/dashboard')->with('message', 'login successful');
             }
             
             // If the user is not an admin, redirect to the home dashboard
-            return redirect('/home')->with('message', 'login successful');
+            return redirect('/')->with('message', 'login successful');
         }
         
         return redirect('/')->with('message', 'login failed');
@@ -39,13 +39,14 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        // if(Auth::user()->hasRole('admin')) {
-        //     backpack_auth()->logout();
-        // }
+
+        if (backpack_auth()->check()) {
+            backpack_auth()->logout();
+        }
 
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/');
+        return redirect('/')->with('message', 'logout successful');
     }
 }

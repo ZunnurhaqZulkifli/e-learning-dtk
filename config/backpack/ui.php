@@ -2,22 +2,6 @@
 
 return [
 
-    // IMPORTANT NOTE: The configurations here get overridden by theme config files.
-    //
-    // Eg. If you're using theme-tabler and config/backpack/theme-tabler.php
-    // has "breadcrumbs" set as false, then THAT value will be used instead
-    // of the value in this file.
-
-    /*
-    |--------------------------------------------------------------------------
-    | Theme (User Interface)
-    |--------------------------------------------------------------------------
-    */
-    // Change the view namespace in order to load a different theme than the one Backpack provides.
-    // You can create child themes yourself, by creating a view folder anywhere in your resources/views
-    // and choosing that view_namespace instead of the default one. Backpack will load a file from there
-    // if it exists, otherwise it will load it from the fallback namespace.
-
     'view_namespace' => 'backpack.theme-tabler::',
     'view_namespace_fallback' => 'backpack.theme-tabler::',
 
@@ -60,17 +44,13 @@ return [
     // The string below will be passed through the url() helper.
     // - default: '' (project root)
     // - alternative: 'admin' (the admin's dashboard)
-    'home_link' => '/home',
+    'home_link' => '/',
 
     // Menu logo. You can replace this with an <img> tag if you have a logo.
     'project_logo' => '<b>Back</b>pack',
 
     // Show / hide breadcrumbs on admin panel pages.
     'breadcrumbs' => true,
-
-    // ------
-    // FOOTER
-    // ------
 
     // Developer or company name. Shown in footer.
     'developer_name' => 'Muhammad Zunnurhaq',
