@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
 use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -28,10 +28,10 @@ Route::prefix('public')->middleware(
 });
 
 // Custom login routes
-Route::get('/pre-login', [LoginController::class, 'pre_login'])->name('pre_login');
+Route::get('/pre-login', [AuthController::class, 'pre_login'])->name('pre_login');
 
 // Login Route 
-Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 // Logout Route
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

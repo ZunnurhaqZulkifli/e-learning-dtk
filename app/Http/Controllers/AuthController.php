@@ -1,16 +1,41 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use function Symfony\Component\String\b;
 
-class LoginController extends Controller
+class AuthController extends Controller
 {
     public function pre_login()
     {
         return view('admin.login');
+    }
+
+    public function pre_register()
+    {
+        return view('admin.register');
+    }
+
+    public function register(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed',
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+
+        Auth::login($user);
+
+        return redirect('/')->with('message', 'registration successful');
     }
 
     public function login(Request $request) {
