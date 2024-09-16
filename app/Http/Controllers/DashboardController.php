@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\User;
 use Backpack\PermissionManager\app\Models\Role as ModelsRole;
@@ -53,6 +54,20 @@ class DashboardController extends Controller
             ->get()->first();
 
         return Inertia::render('TeacherCourse', [
+            'model' => $model,
+        ]);
+    }
+
+    public function teacherShowSubject($id)
+    {
+        $model = Subject::whereId($id)
+            ->with('students')
+            ->with('assignments')
+            ->with('course')
+            ->with('teacher')
+            ->get()->first();
+
+        return Inertia::render('TeacherSubject', [
             'model' => $model,
         ]);
     }

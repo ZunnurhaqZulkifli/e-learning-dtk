@@ -18,9 +18,8 @@ export default function DashboardTeacher({model}) {
                     <div className="col-8">
                         {model.courses.map((course) => {
                             return (
-                                <>
-                                <div className="card mb-4" key={course.key}>
-                                    <div className="card-body">
+                                <div className="card mb-4"  key={course.id}>
+                                    <div className="card-body" >
                                         <div className="row">
                                             <div className="col-10">
                                                 <h4 className="">{course.name}</h4>
@@ -42,11 +41,13 @@ export default function DashboardTeacher({model}) {
                                                                 cursor: "pointer",
                                                                 borderRadius: "0px"
                                                             }
-                                                        }>
+                                                        }
+                                                        key={subject.id}
+                                                        >
                                                         <img src="https://via.placeholder.com/100x100" className="p-2 mt-2" alt=""/>
-                                                            <div class="card-body">
-                                                                <h6 class="card-title">{subject.name}</h6>
-                                                                <p class="card-text">{subject.description}</p>
+                                                            <div className="card-body">
+                                                                <h6 className="card-title">{subject.name}</h6>
+                                                                <p className="card-text">{subject.description}</p>
                                                                 <a href={`/teacher/subject/${subject.id}`} className="btn btn-primary">View</a>
                                                             </div>
                                                         </div>
@@ -56,7 +57,6 @@ export default function DashboardTeacher({model}) {
                                         </div>
                                     </div>
                                 </div>
-                                </>
                             );
                         })}
                     </div>
