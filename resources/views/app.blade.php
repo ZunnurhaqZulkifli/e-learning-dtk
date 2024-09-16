@@ -37,7 +37,9 @@
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
           rel="stylesheet" />
 
-      <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+          rel="stylesheet">
+
 
     <script>
         var Alert = ReactBootstrap.Alert;
@@ -50,12 +52,57 @@
     @inertiaHead
 </head>
 
-<body>
+<style>
+    .card {
+        border-radius: 0px;
+    }
+
+    .btn-primary {
+        border-radius: 0px;
+        background-origin: padding-box;
+        background-color: rgb(0, 71, 165)
+    }
+
+    .icon {
+        background-color: rgb(0, 71, 165)
+    }
+
+    .footer-custom {
+		background-color: rgb(77, 0, 165)
+		height: 35px;
+	}
+</style>
+
+<body data-bs-theme="dark"
+      smoothScroll>
     @include('nav_bar')
 
-    <div class="position-relative">
+    @if (Auth::check())
+        @if (Auth::user()->hasRole('teacher') && request()->segment(1) == 'teacher')
+            @include('nav_bar_teacher')
+        @endif
+
+        @if (Auth::user()->hasRole('student') && request()->segment(1) == 'student')
+            @include('nav_bar_student')
+        @endif
+    @endif
+
+    <div class="position-relative"
+         id="top">
         @inertia
     </div>
+
+	@if(request()->segment(1) == 'admin')
+		<footer class="footer" style="background-color: aliceblue">
+			<div class="text-dark ml-2 text-left d-flex">
+				<i class="bi bi-c-circle align-self-center">
+					<a class="text-dark" style="font-size: 7pt">
+						Developed By Zunnurhaq Zulkifli
+					</a>
+				</i>
+			</div>
+		</footer>
+	@endif
 
 </body>
 

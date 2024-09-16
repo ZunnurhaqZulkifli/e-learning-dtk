@@ -15,6 +15,10 @@ class Course extends Model
         'id',
     ];
 
+    public function subjectCount() {
+        // return $this->hasMany(Subject::class)->count();
+    }
+
     public function students()
     {
         // return $this->belongsToMany(Student::class, 'course_student', 'course_id', 'student_id');
@@ -24,5 +28,10 @@ class Course extends Model
     public function subjects()
     {
         return $this->hasMany(Subject::class);
+    }
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class);
     }
 }

@@ -26,6 +26,7 @@ Route::group(
     ],
     function () {
         Route::get('/dashboard', [DashboardController::class, 'teacherDashboard'])->name('teacher-dashboard');
+        Route::get('/course/{id}', [DashboardController::class, 'teacherShowCourse'])->name('teacher-show-course');
     }
 );
 
