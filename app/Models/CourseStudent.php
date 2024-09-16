@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class StudentCourse extends Pivot
+class CourseStudent extends Pivot
 {
     use HasFactory;
 
@@ -14,7 +14,7 @@ class StudentCourse extends Pivot
         'id',
     ];
 
-    protected $table = 'student_courses';
+    protected $table = 'course_student';
 
     public function student()
     {

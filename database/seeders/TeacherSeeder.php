@@ -17,6 +17,7 @@ class TeacherSeeder extends Seeder
         $teachers = [
             [
                 'name' => User::find(2)->name,
+                'user_id' => User::find(2)->id,
                 'teacher_id' => 'TCH-0001',
                 'created_at' => now(),
             ],
@@ -25,6 +26,7 @@ class TeacherSeeder extends Seeder
         foreach ($teachers as $teacher) {
             Teacher::create([
                 'name' => $teacher['name'],
+                'user_id' => $teacher['user_id'],
                 'teacher_id' => $teacher['teacher_id'],
                 'created_at' => $teacher['created_at'],
             ]);

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -10,7 +11,6 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 // public routes
 Route::group(
     [
-        // 'prefix' => '/',
         'middleware' => HandlePrecognitiveRequests::class,
     ],
     function () {
@@ -19,13 +19,15 @@ Route::group(
     }
 );
 
-Route::prefix('public')->middleware(
-    ['auth']
-)->group(function () {
-    Route::get('/home', function () {
-        return view('front.user.dashboard');
-    });
-});
+Route::group(
+    [
+        'prefix' => '/teacher',
+        'middleware' => 'auth',
+    ],
+    function () {
+        Route::get('/dashboard', [DashboardController::class, 'teacherDashboard'])->name('teacher-dashboard');
+    }
+);
 
 // Custom login routes
 Route::get('/pre-login', [AuthController::class, 'pre_login'])->name('pre_login');

@@ -15,6 +15,12 @@ class Student extends Model
 
     public function courses()
     {
-        return $this->belongsToMany(Course::class, 'student_courses');
+        // return $this->belongsToMany(Course::class, 'course_student', 'course_id', 'student_id');
+        return $this->belongsToMany(Course::class, 'course_student')->withPivot('course_id');
+    }
+
+    public function subjects()
+    {
+        return $this->belongsToMany(Subject::class);
     }
 }

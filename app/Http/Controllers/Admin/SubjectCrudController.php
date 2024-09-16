@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\CourseRequest;
+use App\Http\Requests\SubjectRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
- * Class CourseCrudController
+ * Class SubjectCrudController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class CourseCrudController extends CrudController
+class SubjectCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -26,9 +26,9 @@ class CourseCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\Course::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/course');
-        CRUD::setEntityNameStrings('course', 'courses');
+        CRUD::setModel(\App\Models\Subject::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/subject');
+        CRUD::setEntityNameStrings('subject', 'subjects');
     }
 
     /**
@@ -55,7 +55,7 @@ class CourseCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(CourseRequest::class);
+        CRUD::setValidation(SubjectRequest::class);
         CRUD::setFromDb(); // set fields from db columns.
 
         /**
@@ -73,44 +73,5 @@ class CourseCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
-    }
-
-    protected function setupShowOperation()
-    {
-        // CRUD::setFromDb(); // fields
-        CRUD::column('name');
-        CRUD::column('code');
-        $this->crud->addColumn([
-        'name' => 'subjects',
-        'label' => 'Subjects',
-        'escaped' => false,
-        'value' => function ($entry) {
-            return $entry->subjects->map(function ($subject) {
-                echo '<a href="' . route('subject.show', $subject->id) . '" class="btn btn-primary btn-sm me-2">' . $subject->name . '</a>';
-            })->implode(' ');
-        }]);
-        $this->crud->addColumn([
-            'name' => 'description',
-            'label' => 'Description',
-            'type' => 'textarea',
-            'escaped' => false,
-            'value' => function ($entry) {
-                echo $entry->description;
-            }
-        ]);
-
-        // $this->crud->addColumn([
-        //     'name' => 'students',
-        //     'label' => 'Students',
-        //     'default' => 'No students', 
-        //     'escaped' => false, // allow HTML rendering
-        //     'value' => function ($data) {
-        //         $students = $data->students->toArray();
-
-        //         return collect($students)->map(function ($student) {
-        //             return '<a href="' . route('student.show', $student['id']) . '" class="btn btn-primary btn-sm me-2">' . $student['name'] . '</a>';
-        //         })->implode(' ');
-        //     }
-        // ]);
     }
 }

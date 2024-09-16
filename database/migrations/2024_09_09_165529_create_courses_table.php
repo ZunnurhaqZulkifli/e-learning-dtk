@@ -13,13 +13,12 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('teacher_id')->nullable()->constrained('teachers')->onDelete('cascade');
             $table->string('name');
             $table->string('code');
             $table->string('description')->nullable();
+            $table->integer('total_marks')->default(0);
             $table->string('status')->default('active');
-            $table->boolean('is_completed')->default(false);
-            $table->date('start_date')->nullable();
-            $table->date('end_date')->nullable();
             $table->timestamps();
         });
     }

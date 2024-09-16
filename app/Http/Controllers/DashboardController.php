@@ -3,16 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
-use Illuminate\Support\Facades\App;
+use App\Models\Teacher;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-
         $user = Auth::user();
         $courses = Course::all();
 
@@ -25,5 +24,14 @@ class DashboardController extends Controller
     public function aboutUs()
     {
         return Inertia::render('AboutUs');
+    }
+
+    public function teacherDashboard()
+    {
+        $model = Teacher::whereBelongsTo(Auth::user())->get();
+
+        return Inertia::render('TeacherDashboard', [
+            'model' => $model,
+        ]);
     }
 }

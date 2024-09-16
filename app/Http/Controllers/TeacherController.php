@@ -5,15 +5,21 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTeacherRequest;
 use App\Http\Requests\UpdateTeacherRequest;
 use App\Models\Teacher;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class TeacherController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function teacherDashboard()
     {
-        //
+        Inertia::render('TeacherDashboard', [
+            'user' => Auth::user(),
+        ]);
+    }
+
+    public function profile()
+    {
+        // Inertia::render('Teacher/Profile');
     }
 
     /**

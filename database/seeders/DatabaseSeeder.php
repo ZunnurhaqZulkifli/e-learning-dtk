@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             CourseSeeder::class,
             SubjectSeeder::class,
             StudentSeeder::class,
+            StudentSubjectSeeder::class,
             // AttachRoleToUserSeeder::class,
         ]);
     }

@@ -80,5 +80,7 @@ class UsersSeeder extends Seeder
                 $user->assignRole(Role::find($key + 1));
             }
         }
+
+        User::factory()->count(40)->create();
     }
 }
