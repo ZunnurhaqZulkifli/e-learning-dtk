@@ -49,6 +49,7 @@
         "postcss": "^8.4.47",
         "proxy-from-env": "^1.1.0",
         "react-bootstrap": "^2.10.4",
+        "react-player": "^2.16.0",
         "rollup": "^4.21.3",
         "scheduler": "^0.23.2",
         "source-map-js": "^1.2.1",

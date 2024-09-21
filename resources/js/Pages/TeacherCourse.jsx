@@ -1,3 +1,4 @@
+import StatusBadge from "./Components/StatusBadge";
 import MasterLayout from "./MasterLayout";
 
 export default function CourseTeacher({model}) {
@@ -11,7 +12,9 @@ export default function CourseTeacher({model}) {
             <div className="">
                 <h6 className="card-title">{model.name}</h6>
                 <h6 className="card-title">{model.description}</h6>
-                <h6 className="card-title">{model.status}</h6>
+                <h6 className="card-title">
+                    <StatusBadge status={model.status}/>
+                </h6>
                 <h6 className="card-title">{model.students.length}</h6>
                 <h6 className="card-title">{model.teacher.name}</h6>
             </div>

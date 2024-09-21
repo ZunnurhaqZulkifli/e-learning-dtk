@@ -28,6 +28,7 @@ Route::group(
         Route::get('/dashboard', [DashboardController::class, 'teacherDashboard'])->name('teacher-dashboard');
         Route::get('/course/{id}', [DashboardController::class, 'teacherShowCourse'])->name('teacher-show-course');
         Route::get('/subject/{id}', [DashboardController::class, 'teacherShowSubject'])->name('teacher-show-subject');
+        Route::get('/assignment/{id}', [DashboardController::class, 'teacherShowAssginment'])->name('teacher-show-assingment');
     }
 );
 

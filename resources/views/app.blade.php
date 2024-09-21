@@ -71,6 +71,10 @@
 		background-color: rgb(77, 0, 165)
 		height: 35px;
 	}
+
+    .badge {
+        border-radius: 2px
+    }
 </style>
 
 <body data-bs-theme="dark"

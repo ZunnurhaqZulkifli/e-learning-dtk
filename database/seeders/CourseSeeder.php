@@ -15,23 +15,23 @@ class CourseSeeder extends Seeder
     {
         $courses = [
             [
-                'name' => 'Web Development',
+                'name' => 'Computer System and Network',
                 'code' => 'WEBD-101',
-                'description' => 'Learn how to build a website.',
+                'description' => 'Learn how to build a handle system and networking.',
                 'created_at' => now(),
                 'teacher_id' => 1,
             ],
             [
-                'name' => 'Mobile Development',
-                'code' => 'MBD-101',
-                'description' => 'Learn how to build a mobile.',
+                'name' => 'ICT Maintainance Management',
+                'code' => 'ICT-101',
+                'description' => 'Learn how to manage and maintain system.',
                 'created_at' => now(),
                 'teacher_id' => 1,
             ],
             [
-                'name' => 'Machine Learning',
+                'name' => 'Network Installation Management',
                 'code' => 'MLM-101',
-                'description' => 'Learn how to build a destructive robot.',
+                'description' => 'Learn how to build setup networking and do installation.',
                 'created_at' => now(),
                 'teacher_id' => 1,
             ],

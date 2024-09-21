@@ -23,4 +23,9 @@ class Student extends Model
     {
         return $this->belongsToMany(Subject::class);
     }
+
+    public function assignments()
+    {
+        return $this->belongsToMany(AssignmentDetail::class, 'assignment_detail_student', 'student_id', 'assignment_detail_id');
+    }
 }

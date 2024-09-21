@@ -2,22 +2,22 @@
 
 namespace App\Models;
 
-use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Subject extends Model
+class AssignmentDetail extends Model
 {
-    use CrudTrait;
     use HasFactory;
+
+    protected $table = 'assignment_details';
 
     protected $guarded = [
         'id',
     ];
 
-    public function course()
+    public function assignment()
     {
-        return $this->belongsTo(Course::class);
+        return $this->belongsTo(Assignment::class);
     }
 
     public function teacher()
@@ -26,16 +26,6 @@ class Subject extends Model
     }
 
     public function students()
-    {
-        return $this->belongsToMany(Student::class);
-    }
-
-    public function assignments()
-    {
-        return $this->hasMany(Assignment::class);
-    }
-
-    public function assignmentStudents()
     {
         return $this->belongsToMany(Student::class, 'assignment_detail_student', 'assignment_detail_id', 'student_id');
     }

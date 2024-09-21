@@ -21,6 +21,7 @@ class SubjectSeeder extends Seeder
                 'code'        => 'HTML-101',
                 'description' => 'LEARN HOW TO BUILD A WEBSITE USING HTML.',
                 'teacher_id'  => 1,
+                'video_path'  => 'https://www.youtube.com/watch?v=Ir1xi2zeuug',
                 'course_id'   => Course::find(1)->id,
                 'created_at'  => now(),
             ],
@@ -29,6 +30,7 @@ class SubjectSeeder extends Seeder
                 'code'        => 'CSS-404',
                 'description' => 'LEARN HOW TO BUILD A WEBSITE USING CSS.',
                 'teacher_id'  => 1,
+                'video_path'  => 'https://www.youtube.com/watch?v=Ir1xi2zeuug',
                 'course_id'   => Course::find(1)->id,
                 'created_at'  => now(),
             ],
@@ -37,11 +39,13 @@ class SubjectSeeder extends Seeder
                 'code'        => 'DBM-404',
                 'description' => 'LEARN HOW TO MANAGE DATABASE.',
                 'teacher_id'  => 1,
+                'video_path'  => 'https://www.youtube.com/watch?v=Ir1xi2zeuug',
                 'course_id'   => Course::find(1)->id,
                 'created_at'  => now(),
             ],
             [
                 'teacher_id'  => 1,
+                'video_path'  => 'https://www.youtube.com/watch?v=Ir1xi2zeuug',
                 'course_id'   => Course::find(2)->id,
                 'name'        => 'JAVA ENGINEERING',
                 'code'        => 'JAVA-M-101',
@@ -50,6 +54,7 @@ class SubjectSeeder extends Seeder
             ],
             [
                 'teacher_id'  => 1,
+                'video_path'  => 'https://www.youtube.com/watch?v=Ir1xi2zeuug',
                 'course_id'   => Course::find(2)->id,
                 'name'        => 'ALGORITHM BASICS',
                 'code'        => 'ALGM-101',
@@ -58,6 +63,7 @@ class SubjectSeeder extends Seeder
             ],
             [
                 'teacher_id'  => 1,
+                'video_path'  => 'https://www.youtube.com/watch?v=Ir1xi2zeuug',
                 'course_id'   => Course::find(3)->id,
                 'name'        => 'STATISTICS',
                 'code'        => 'STS-101',
@@ -66,6 +72,7 @@ class SubjectSeeder extends Seeder
             ],
             [
                 'teacher_id'  => 1,
+                'video_path'  => 'https://www.youtube.com/watch?v=Ir1xi2zeuug',
                 'course_id'   => Course::find(3)->id,
                 'name'        => 'DATA ANALYSIS',
                 'code'        => 'DTA-101',

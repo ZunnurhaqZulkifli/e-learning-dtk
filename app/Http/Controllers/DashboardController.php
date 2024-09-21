@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Assignment;
+use App\Models\AssignmentDetail;
 use App\Models\Course;
+use App\Models\Student;
 use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\User;
@@ -61,13 +64,47 @@ class DashboardController extends Controller
     public function teacherShowSubject($id)
     {
         $model = Subject::whereId($id)
-            ->with('students')
             ->with('assignments')
+            ->with('assignments.assignmentDetails')
+            ->with('assignments.assignmentDetails.students')
             ->with('course')
             ->with('teacher')
-            ->get()->first();
+            ->with('students')
+            ->get()
+            ->first();
 
         return Inertia::render('TeacherSubject', [
+            'model' => $model,
+        ]);
+    }
+
+    public function teacherShowAssginment($id)
+    {
+        $model = Assignment::whereId($id)
+            ->whereHas('subject', function ($query) {
+                $query->whereHas('teacher', function ($query) {
+                    $query->whereBelongsTo(Auth::user());
+                });
+            })
+            ->with('assignmentDetails')
+            ->with('assignmentDetails.students')
+            ->with('assignmentStudents')
+            ->with('subject')
+            ->with('subject.teacher')
+            ->get()
+            ->first();
+
+        // if(isset($model)) {
+        //     $model['assignments'] = AssignmentDetail::whereAssignmentId($model->id)
+        //         ->with('assignment')
+        //         ->where('is_graded', false)
+        //         ->with('students')
+        //         ->get();
+        // }
+
+        // dd($model);
+
+        return Inertia::render('TeacherAssignment', [
             'model' => $model,
         ]);
     }
