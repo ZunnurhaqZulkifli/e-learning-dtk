@@ -65,16 +65,24 @@ class initialize extends Command
         $this->info(' ');
         $npmInstallStatus = $this->rCommand('git pull');
 
+        if ($npmInstallStatus !== 0) {
+            $this->info(' ');
+            $this->error('Git pull failed!, contanct the administrator');
+            return;
+        }
+
         $this->info('Installing Updates...');
 
         for($i = 0; $i < 80; $i++) {
             $progress->advance(1);
             usleep(25000);
         }
-        
-        if ($npmInstallStatus !== 0) {
+
+        exec('composer install', $output, $returnVar);
+        $progress->advance(10);
+        if ($returnVar !== 0) {
             $this->info(' ');
-            $this->error('Git pull failed!, contanct the administrator');
+            $this->error('Composer installation failed!');
             return;
         }
 
@@ -83,6 +91,6 @@ class initialize extends Command
 
         $this->info(' ');
         $this->info('App Ready To Launch...');
-        $this->info('run "php artisan app:start" to start the application');
+        $this->info('run "php artisan app:start" to start the application.');
     }
 }
