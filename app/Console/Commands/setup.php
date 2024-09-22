@@ -84,10 +84,10 @@ class setup extends Command
         $this->info(' ');
         $this->call('migrate:fresh');
         
+        $this->call('db:seed');
         $this->info(' ');
         $this->info('Auto Seed Database...');
         $this->info(' ');
-        $this->call('db:seed');
 
         for($i = 0; $i < 10; $i++) {
             $progress->advance($i);

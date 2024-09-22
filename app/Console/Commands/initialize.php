@@ -83,5 +83,6 @@ class initialize extends Command
 
         $this->info(' ');
         $this->info('App Ready To Launch...');
+        $this->info('run "php artisan app:start" to start the application');
     }
 }
