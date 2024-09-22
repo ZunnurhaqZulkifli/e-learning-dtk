@@ -19,7 +19,7 @@ class setup extends Command
      *
      * @var string
      */
-    protected $description = 'Automatically setup the application for server and local deployment';
+    protected $description = 'Automatically setup the application for server and local deployment.';
 
     /**
      * Execute the console command.
@@ -59,6 +59,7 @@ class setup extends Command
         $progress = $this->output->createProgressBar(100);
         $this->info(' ');
         $this->info('Starting the application setup process...');
+        $this->warn('Signed by: ' . '~z.z~');
 
         $progress->start();
 
