@@ -72,6 +72,7 @@ class DashboardController extends Controller
             ->with('students')
             ->get()
             ->first();
+            
 
         return Inertia::render('TeacherSubject', [
             'model' => $model,
