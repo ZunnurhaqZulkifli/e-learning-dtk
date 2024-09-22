@@ -19,7 +19,7 @@ class setup extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Automatically setup the application for server and local deployment';
 
     /**
      * Execute the console command.
