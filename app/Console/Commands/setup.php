@@ -58,22 +58,10 @@ class setup extends Command
     {
         $progress = $this->output->createProgressBar(100);
         $this->info(' ');
-        $this->info('Starting the application setup process...');
-        $this->warn('Signed by: ' . '~z.z~');
+        $this->info('Starting the application startup process...');
+        $this->info(' ');
 
         $progress->start();
-
-        // Pulling the latest changes from the repository
-        $this->info(' ');
-        $this->info('Pulling Changes...');
-        $this->info(' ');
-        $npmInstallStatus = $this->rCommand('git pull');
-        $progress->advance(5);
-        if ($npmInstallStatus !== 0) {
-            $this->info(' ');
-            $this->error('Git pull failed!, contanct the administrator');
-            return;
-        }
 
         $this->info(' ');
         $this->info('Installing Composer dependencies...');
@@ -88,11 +76,16 @@ class setup extends Command
         }
 
         $this->info(' ');
+        $this->warn('Auto Resetting Database...');
         $this->call('db:wipe');
         
         $this->info(' ');
+        $this->info('Auto Migrating Database...');
+        $this->info(' ');
         $this->call('migrate:fresh');
         
+        $this->info(' ');
+        $this->info('Auto Seed Database...');
         $this->info(' ');
         $this->call('db:seed');
 
@@ -105,8 +98,8 @@ class setup extends Command
         $this->info('Starting Valet dependencies...');
         $this->info(' ');
 
-        exec('valet start', $output, $returnVar);
-        if ($returnVar !== 0) {
+        exec('valet start', $output, $valetStartupStatus);
+        if ($valetStartupStatus !== 0) {
             $this->info(' ');
             $this->error('Valet Startup failed!');
             return;
