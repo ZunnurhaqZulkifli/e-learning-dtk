@@ -17,13 +17,13 @@ class UsersSeeder extends Seeder
     {
         $users = [
             [
-                'name'                  => 'Muhammad Zunnurhaq',
-                'username'              => 'zunnurhaq',
-                'identification_number' => '010614010959',
-                'phone_number'          => '0134065517',
-                'email'                 => 'zunnurhaq123@gmail.com',
+                'name'                  => 'Muhammad Administrator',
+                'username'              => 'admin',
+                'identification_number' => '9999999999999',
+                'phone_number'          => '0134065518',
+                'email'                 => 'admin@gmail.com',
                 'email_verified_at'     => now(),
-                'password'              => Hash::make('password'),
+                'password'              => Hash::make('a'),
                 'created_at'            => now(),
                 'updated_at'            => now(),
             ],
