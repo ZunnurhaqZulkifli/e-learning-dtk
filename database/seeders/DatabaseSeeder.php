@@ -6,6 +6,7 @@ use App\Models\AssignmentDetail;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use PHPUnit\Event\Telemetry\System;
 
 class DatabaseSeeder extends Seeder
 {
@@ -30,6 +31,7 @@ class DatabaseSeeder extends Seeder
             StudentSubjectSeeder::class,
             AssignmentSeeder::class,
             AssignmentDetailSeeder::class,
+            SystemLogsSeeder::class,
             // AttachRoleToUserSeeder::class,
         ]);
     }

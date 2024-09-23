@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\SystemLogs;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 
