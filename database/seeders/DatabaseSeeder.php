@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        $this->command->call('migrate:refresh');
+        $this->command->call('db:wipe');
+        $this->command->call('migrate:fresh');
 
         $this->call([
             RoleSeeder::class,
