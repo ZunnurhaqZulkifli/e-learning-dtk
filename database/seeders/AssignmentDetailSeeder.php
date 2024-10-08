@@ -18,10 +18,10 @@ class AssignmentDetailSeeder extends Seeder
     {
         $details = [
             [
-                'assignment_id' => Assignment::find(6)->id,
+                'assignment_id' => Assignment::find(1)->id,
                 'teacher_id'    => Teacher::find(1)->id,
                 'name'          => Student::find(1)->name,
-                'code'          => Assignment::find(6)->code,
+                'code'          => Assignment::find(1)->code,
                 'description'   => 'ntah',
                 'marks'         => '37',
                 'start_date'    => '2024-09-01',
@@ -30,10 +30,10 @@ class AssignmentDetailSeeder extends Seeder
                 'created_at'    => now(),
             ],
             [
-                'assignment_id' => Assignment::find(6)->id,
+                'assignment_id' => Assignment::find(1)->id,
                 'teacher_id'    => Teacher::find(1)->id,
                 'name'          => Student::find(1)->name,
-                'code'          => Assignment::find(6)->code,
+                'code'          => Assignment::find(1)->code,
                 'description'   => 'ntah 2',
                 'marks'         => '53',
                 'start_date'    => '2024-09-01',

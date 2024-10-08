@@ -63,6 +63,12 @@
         background-color: rgb(0, 71, 165)
     }
 
+    .btn-success {
+        border-radius: 0px;
+        background-origin: padding-box;
+        background-color: rgb(0, 255, 136)
+    }
+
     .icon {
         background-color: rgb(0, 71, 165)
     }
@@ -86,14 +92,38 @@
             @include('nav_bar_teacher')
         @endif
 
-        @if (Auth::user()->hasRole('student') && request()->segment(1) == 'student')
+        @if (Auth::user()->hasRole('student'))
             @include('nav_bar_student')
         @endif
     @endif
 
-    <div class="position-relative"
-         id="top">
+    <div class="position-relative" id="top">
         @inertia
+
+        @if(request()->session()->get('message'))
+            <div class="p-4">
+                <div class="alert alert-danger alert-dismissible fade show"
+                    role="alert" id="auto-hide-alert">
+                    {{ request()->session()->get('message') }}
+                    <button aria-label="Close"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            type="button"></button>
+                </div>
+            </div>
+            
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    setTimeout(function () {
+                        var alert = document.getElementById('auto-hide-alert');
+                        if (alert) {
+                            var bsAlert = new bootstrap.Alert(alert);
+                            bsAlert.close();
+                        }
+                    }, 5000);
+                });
+            </script>
+        @endif
     </div>
 
 	@if(request()->segment(1) == 'admin')

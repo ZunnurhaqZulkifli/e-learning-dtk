@@ -78,6 +78,11 @@ export default function DashboardTeacher({model}) {
                                 </form>
                             </div>
                         </div>
+
+
+                        <div>
+                            kene buat lists of managed students
+                        </div>
                     </div>
                 </div>
             </MasterLayout>

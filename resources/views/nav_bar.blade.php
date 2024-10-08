@@ -60,6 +60,16 @@
                            href="/admin/dashboard"
                            type="button">Backend</a></li>
                 @endif
+
+                @if(Auth::user()->hasRole('student'))
+                    <li>
+                        <a class="dropdown-item"
+                           href="{{ route('student-dashboard') }}"
+                           type="button">Dashboard
+                        </a>
+                    </li>
+                @endif
+                
             </ul>
         </div>
     @else

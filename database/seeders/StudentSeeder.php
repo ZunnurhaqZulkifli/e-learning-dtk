@@ -17,6 +17,7 @@ class StudentSeeder extends Seeder
         $students = [
             [
                 'name' => User::find(3)->name,
+                'user_id' => User::find(3)->id,
                 'student_id' => 'STD-0001',
                 'created_at' => now(),
                 'courses' => [1],
@@ -24,6 +25,7 @@ class StudentSeeder extends Seeder
 
             [
                 'name' => User::find(4)->name,
+                'user_id' => User::find(4)->id,
                 'student_id' => 'STD-0002',
                 'created_at' => now(),
                 'courses' => [1, 2],
@@ -33,6 +35,7 @@ class StudentSeeder extends Seeder
         foreach ($students as $studentData) {
             $student = Student::create([
                 'name' => $studentData['name'],
+                'user_id' => $studentData['user_id'],
                 'student_id' => $studentData['student_id'],
                 'created_at' => $studentData['created_at'],
             ]);

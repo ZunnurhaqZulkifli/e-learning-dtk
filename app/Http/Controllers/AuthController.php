@@ -59,12 +59,11 @@ class AuthController extends Controller
             return redirect('/')->with('message', 'login successful');
         }
         
-        return redirect('/')->with('message', 'login failed');
+        return redirect('/')->with('message', 'login failed, please check your credentials');
     }
 
     public function logout(Request $request)
     {
-
         if (backpack_auth()->check()) {
             backpack_auth()->logout();
         }
