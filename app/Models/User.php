@@ -27,6 +27,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'username',
+        'phone_number',
+        'password',
     ];
 
     /**
@@ -40,10 +43,10 @@ class User extends Authenticatable
     ];
 
     protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-        'created_at' => 'datetime:d/m/Y H:i A',
-        'updated_at' => 'datetime:d/m/Y H:i A',
+        'email_verified_at',
+        'password',
+        'created_at',
+        'updated_at',
     ];
 
     /**
@@ -54,8 +57,8 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'email_verified_at',
+            'password',
         ];
     }
 

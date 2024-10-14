@@ -189,7 +189,7 @@ class DashboardController extends Controller
     public function showStudentAssignment(string $id) {
 
         $assignment = Assignment::findOrFail($id)->load('subject');
-
+        
         $assignmentDetail = AssignmentDetail::whereBelongsTo($assignment)
             ->whereHas('students', function ($query) {
                 $query->whereBelongsTo(Auth::user());

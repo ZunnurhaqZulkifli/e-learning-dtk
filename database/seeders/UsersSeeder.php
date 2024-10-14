@@ -19,7 +19,7 @@ class UsersSeeder extends Seeder
             [
                 'name'                  => 'Muhammad Administrator',
                 'username'              => 'admin',
-                'identification_number' => '9999999999999',
+                // 'identification_number' => '9999999999999',
                 'phone_number'          => '0134065518',
                 'email'                 => 'admin@gmail.com',
                 'email_verified_at'     => now(),
@@ -31,7 +31,7 @@ class UsersSeeder extends Seeder
             [
                 'name'                  => 'Cikgu Ali',
                 'username'              => 'ali',
-                'identification_number' => '999999999999',
+                // 'identification_number' => '999999999999',
                 'phone_number'          => '01444044404',
                 'email'                 => 'ali@gmail.com',
                 'email_verified_at'     => now(),
@@ -44,7 +44,7 @@ class UsersSeeder extends Seeder
             [
                 'name'                  => 'Akiff Hakimi',
                 'username'              => 'akif',
-                'identification_number' => '010512354323',
+                // 'identification_number' => '010512354323',
                 'phone_number'          => '0193381232',
                 'email'                 => 'akif@gmail.com',
                 'email_verified_at'     => now(),
@@ -57,7 +57,7 @@ class UsersSeeder extends Seeder
             [
                 'name'                  => 'Hasiff Osman',
                 'username'              => 'hasiff',
-                'identification_number' => '18237172731',
+                // 'identification_number' => '18237172731',
                 'phone_number'          => '0129838123',
                 'email'                 => 'hasiff@gmail.com',
                 'email_verified_at'     => now(),

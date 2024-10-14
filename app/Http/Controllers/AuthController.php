@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,37 +15,54 @@ class AuthController extends Controller
         return view('admin.login');
     }
 
-    public function pre_register()
-    {
+    public function pre_register() {
         return view('admin.register');
     }
 
     public function register(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|confirmed',
+            'name'         => 'required|string|max:255',
+            'username'     => 'required|string|max:255|unique:users,username',
+            'email'        => 'required|string|email|max:255|unique:users,email',
+            'phone_number' => 'required|string|max:15',
+            'password'     => 'required|string|min:8',
         ]);
+
+        $mapper = [
+            "student" => "App\Models\Student",
+            "teacher" => "App\Models\Teacher",
+        ];
 
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
+            'name'          => $request->name,
+            'username'      => $request->username,
+            'email'         => $request->email,
+            'phone_number'  => $request->phone_number,
+            'password'      => bcrypt($request->password),
         ]);
+
+        $profile = $mapper[$request->typeable]::create([
+            'user_id' => $user->id,
+            'name' => $user->name,
+            'student_id' => $request->typeable === 'student' ? 'STD-' . fake()->unique()->numerify('#####') : 'TCH-' . fake()->unique()->numerify('#####'),
+        ]);
+
+        $user->typable()->associate($profile);
+        $user->save();
 
         Auth::login($user);
-
-        return redirect('/')->with('message', 'registration successful');
-    }
+        return redirect('/')->with('success', 'Registration successful!');
+}
 
     public function login(Request $request) {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
+        $validatedData = $request->validate([
+            'email'    => 'email',
+            'username' => '',
+            'password' => 'bail|required|string|min:1',
         ]);
 
-        if (Auth::attempt($request->only('email', 'password'))) {
+        if (Auth::attempt($validatedData)) {
             $request->session()->regenerate();
 
             $check_if_admin = Auth::user()->hasRole('admin');

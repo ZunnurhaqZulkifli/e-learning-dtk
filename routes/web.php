@@ -63,3 +63,7 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 // Logout Route
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/pre-register', [AuthController::class, 'pre_register'])->name('pre_register');
+
+Route::post('/register', [AuthController::class, 'register'])->name('register');

@@ -20,10 +20,10 @@
                              data-mdb-input-init>
                             <input class="form-control form-control-lg"
                                    id="form1Example13"
-                                   name="email"
-                                   type="email" />
+                                   name="username"
+                                   type="username" />
                             <label class="form-label"
-                                   for="form1Example13">Email address</label>
+                                   for="form1Example13">Username</label>
                         </div>
 
                         <!-- Password input -->

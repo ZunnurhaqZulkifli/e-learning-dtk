@@ -82,7 +82,7 @@
             <li class="nav-item">
                 <a aria-current="page"
                    class="nav-link text-white"
-                   href="{{ route('pre_login') }}">Register</a>
+                   href="{{ route('pre_register') }}">Register</a>
             </li>
         </ul>
     @endif

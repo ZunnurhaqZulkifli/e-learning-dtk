@@ -16,7 +16,6 @@ return new class extends Migration
             $table->nullableMorphs('typable');
             $table->string('name');
             $table->string('username');
-            $table->string('identification_number')->unique();
             $table->string('phone_number')->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
