@@ -23,7 +23,7 @@ class UsersSeeder extends Seeder
                 'phone_number'          => '0134065518',
                 'email'                 => 'admin@gmail.com',
                 'email_verified_at'     => now(),
-                'password'              => Hash::make('a'),
+                'password'              => Hash::make('password'),
                 'created_at'            => now(),
                 'updated_at'            => now(),
             ],

@@ -85,7 +85,7 @@ export default function SubjectTeacher({model}) {
                         <div className="p-3">
                             <ReactPlayer 
                                 // url={model.video_path}
-                                url={'https://youtu.be/hOHKltAiKXQ'}
+                                url={model.video_path}
                                 controls={
                                     true
                                 }
