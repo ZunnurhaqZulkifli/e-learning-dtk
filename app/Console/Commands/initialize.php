@@ -87,7 +87,6 @@ class initialize extends Command
             return;
         }
 
-
         $progress->finish();
 
         $this->info(' ');
