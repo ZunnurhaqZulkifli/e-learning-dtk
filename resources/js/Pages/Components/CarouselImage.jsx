@@ -3,6 +3,7 @@ export function CarouselImage({ text, image }) {
     <img
       className="d-block w-100"
       src={`http://e-learning-dtk.test/`+ image}
+      
       // alt={image}
     />
   );
