@@ -19,7 +19,7 @@
                                    id="form1Example13"
                                    name="email"
                                    type="email" />
-                            <label class="form-label" for="form1Example13">email</label>
+                            <label class="form-label" for="form1Example13">Email</label>
                         </div>
                         
                         <!-- Email input -->
@@ -44,18 +44,19 @@
                                    for="form1Example23">Password</label>
                         </div>
 
-                        <div class="d-flex justify-content-around mb-4">
+                        <div class="row mb-4">
                             <!-- Checkbox -->
-                            <div class="form-check">
+                            <div class="form-check col-5 ml-3">
                                 <input checked
                                        class="form-check-input"
                                        id="form1Example3"
                                        type="checkbox"
                                        value="" />
-                                <label class="form-check-label"
-                                       for="form1Example3"> Remember me </label>
+                                <label class="form-check-label" for="form1Example3"> Remember me </label>
                             </div>
-                            <a href="#!">Forgot password?</a>
+                            <div class="d-flex col-6 justify-content-end">
+                                <a href="#!">Forgot password?</a>
+                            </div>
                         </div>
 
                         <!-- Submit button -->
@@ -66,7 +67,7 @@
 
                     </form>
 
-                    <div class="mt-2">You can either user email / username for logging in the system</div>
+                    <div class="mt-2">You can either user email / username for logging in the portal.</div>
                 </div>
             </div>
         </div>
