@@ -51,7 +51,20 @@ class moveImages extends Command
 
     public function handle()
     {
+        $this->info('Current Directory: ' . getcwd());
         $this->rCommand('php artisan storage:link');
+        $imagesDirectory = public_path('storage/images');
+        
+        if (!is_dir($imagesDirectory)) {
+            if (mkdir($imagesDirectory, 0755, true)) {
+                $this->info('Created directory: ' . $imagesDirectory);
+            } else {
+                $this->error('Failed to create directory: ' . $imagesDirectory);
+                return;
+            }
+        } else {
+            $this->info('Directory already exists: ' . $imagesDirectory);
+        }
 
         if (file_exists('./images/banner_01.png')) {
             $this->info('banner 1 ' . file_exists('./images/banner_01.png'));
