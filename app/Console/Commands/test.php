@@ -50,25 +50,18 @@ class test extends Command
 
     public function handle()
     {
+        $this->info('Current Directory: ' . getcwd());
+
         $this->rCommand('php artisan storage:link');
-        $this->rCommand('cd public/storage/');
-        $this->rCommand('mkdir images');
-        $this->rCommand('cd ../../');
+        $this->rCommand('mkdir public/storage/images'); // Directly create the directory
 
-
-        if (file_exists('./images/banner_01.png')) {
-            $this->info('banner 1 ' . file_exists('./images/banner_01.png'));
-            $this->rCommand('copy images/banner_01.png public/storage/images/');
-            
-            // $this->info('banner 2 ' . file_exists('./images/banner_02.png'));
-            // $this->rCommand('copy images\\banner_02.png public\\storage\\images\\');
-
-            // $this->info('banner 3 ' . file_exists('./images/banner_03.png'));
-            // $this->rCommand('copy images\\banner_03.png public\\storage\\images\\');
-
-            // $this->info('Images moved successfully');
+        if (file_exists(public_path('images/banner_01.png'))) {
+            $this->info('banner 1 exists');
+            $this->rCommand('copy ' . public_path('images/banner_01.png') . ' ' . public_path('storage/images/'));
         } else {
             $this->error('File does not exist');
         }
+
+        // Additional banners can be processed similarly
     }
 }
