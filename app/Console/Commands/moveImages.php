@@ -53,15 +53,15 @@ class moveImages extends Command
     {
         $this->rCommand('php artisan storage:link');
 
-        if(file_exists('./images/banner_01.png')) {
+        if (file_exists('./images/banner_01.png')) {
             $this->info('banner 1 ' . file_exists('./images/banner_01.png'));
-            $this->rCommand('move ./images/banner_01.png ./public/storage/images/');
+            $this->rCommand('copy images\\banner_01.png public\\storage\\images\\');
             
             $this->info('banner 2 ' . file_exists('./images/banner_02.png'));
-            $this->rCommand('move ./images/banner_02.png ./public/storage/images/');
+            $this->rCommand('copy images\\banner_02.png public\\storage\\images\\');
 
             $this->info('banner 3 ' . file_exists('./images/banner_03.png'));
-            $this->rCommand('move ./images/banner_03.png ./public/storage/images/');
+            $this->rCommand('copy images\\banner_03.png public\\storage\\images\\');
 
             $this->info('Images moved successfully');
         } else {
