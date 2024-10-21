@@ -52,16 +52,36 @@ class test extends Command
     {
         $this->info('Current Directory: ' . getcwd());
 
+        // Ensure storage link
         $this->rCommand('php artisan storage:link');
-        $this->rCommand('mkdir public/storage/images'); // Directly create the directory
 
-        if (file_exists(public_path('images/banner_01.png'))) {
-            $this->info('banner 1 exists');
-            $this->rCommand('copy ' . public_path('images/banner_01.png') . ' ' . public_path('storage/images/'));
+        // Define the directory path for images
+        $imagesDirectory = public_path('storage/images');
+
+        // Create the images directory if it doesn't exist
+        if (!is_dir($imagesDirectory)) {
+            if (mkdir($imagesDirectory, 0755, true)) {
+                $this->info('Created directory: ' . $imagesDirectory);
+            } else {
+                $this->error('Failed to create directory: ' . $imagesDirectory);
+                return;
+            }
         } else {
-            $this->error('File does not exist');
+            $this->info('Directory already exists: ' . $imagesDirectory);
         }
 
-        // Additional banners can be processed similarly
+        // Check if the image exists and copy
+        $sourcePath = public_path('images/banner_01.png');
+        if (file_exists($sourcePath)) {
+            $this->info('banner 1 exists');
+            // Use PHP's copy function instead of a shell command
+            if (copy($sourcePath, $imagesDirectory . '/banner_01.png')) {
+                $this->info('banner 1 copied successfully');
+            } else {
+                $this->error('Failed to copy banner 1');
+            }
+        } else {
+            $this->error('File does not exist: ' . $sourcePath);
+        }
     }
 }
