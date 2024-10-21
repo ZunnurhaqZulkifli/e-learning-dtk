@@ -1,31 +1,17 @@
 import Carousel from 'react-bootstrap/Carousel';
 import CarouselImage from '../Components/CarouselImage';
 
-function CarouselSlider() {
+function CarouselSlider({ images }) {
   return (
-    <Carousel>
+    <Carousel fade>
       <Carousel.Item>
-        <CarouselImage text="First slide" />
-        <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </Carousel.Caption>
+        <CarouselImage text="First slide" image={ images[0] }/>
       </Carousel.Item>
       <Carousel.Item>
-        <CarouselImage text="Second slide" />
-        <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </Carousel.Caption>
+        <CarouselImage text="Second slide" image={ images[1] }/>
       </Carousel.Item>
       <Carousel.Item>
-        <CarouselImage text="Third slide" />
-        <Carousel.Caption>
-          <h3>Third slide label</h3>
-          <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
-        </Carousel.Caption>
+        <CarouselImage text="Third slide" image={ images[2] }/>
       </Carousel.Item>
     </Carousel>
   );

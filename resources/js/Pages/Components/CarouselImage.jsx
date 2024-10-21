@@ -1,10 +1,9 @@
-
-export function CarouselImage({ text }) {
+export function CarouselImage({ text, image }) {
   return (
     <img
       className="d-block w-100"
-      src="https://via.placeholder.com/1920x600"
-      alt={text}
+      src={`http://e-learning.test/`+ image}
+      // alt={image}
     />
   );
 }

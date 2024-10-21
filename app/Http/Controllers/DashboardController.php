@@ -5,28 +5,28 @@ namespace App\Http\Controllers;
 use App\Models\Assignment;
 use App\Models\AssignmentDetail;
 use App\Models\Course;
+use App\Models\Image;
 use App\Models\Student;
 use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\User;
-use Backpack\PermissionManager\app\Models\Role as ModelsRole;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
-use Spatie\Permission\Models\Role;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
+        $user    = Auth::user();
         $courses = Course::with('subjects')
             ->with('subjects.assignments')
             ->paginate(4)
-            ;
+        ;
 
         return Inertia::render('Dashboard', [
-           'user' => $user,
-           'courses' => $courses,
+            'images'  => Image::all()->pluck('path'),
+            'user'    => $user,
+            'courses' => $courses,
         ]);
     }
 
@@ -46,7 +46,7 @@ class DashboardController extends Controller
         $courses = Course::whereBelongsTo($model)->get();
 
         return Inertia::render('TeacherDashboard', [
-            'model' => $model,
+            'model'   => $model,
             'courses' => $courses,
         ]);
     }
@@ -75,7 +75,6 @@ class DashboardController extends Controller
             ->with('students')
             ->get()
             ->first();
-            
 
         return Inertia::render('TeacherSubject', [
             'model' => $model,
@@ -123,13 +122,14 @@ class DashboardController extends Controller
         $courses = $model->courses;
 
         return Inertia::render('StudentDashboard', [
-            'model' => $model,
+            'model'   => $model,
             'courses' => $courses,
         ]);
     }
 
     // listing of all the student's enrolled courses
-    public function studentCourses() {
+    public function studentCourses()
+    {
         $model = Student::whereBelongsTo(Auth::user())
             ->with('courses')
             ->get()->first();
@@ -137,14 +137,15 @@ class DashboardController extends Controller
         $courses = $model->courses;
 
         return Inertia::render('StudentCourses', [
-            'model' => $model,
+            'model'   => $model,
             'courses' => $courses,
-        ]);        
+        ]);
     }
 
     // individual courses page for students
-    public function studentShowCourse(string $id) {
-        
+    public function studentShowCourse(string $id)
+    {
+
         $model = Course::whereId($id)
             ->with('subjects')
             ->with('subjects.assignments')
@@ -158,7 +159,8 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function studentAssingments() {
+    public function studentAssingments()
+    {
 
         // this is all the student's assignments
         $model = Student::whereBelongsTo(Auth::user())
@@ -169,8 +171,8 @@ class DashboardController extends Controller
 
         $subjects = [];
 
-        foreach($model->courses as $course) {
-            foreach($course->subjects as $subject) {
+        foreach ($model->courses as $course) {
+            foreach ($course->subjects as $subject) {
                 $subjects[] = $subject;
             }
         }
@@ -180,16 +182,17 @@ class DashboardController extends Controller
         })->get();
 
         return Inertia::render('StudentAssignments', [
-            'model' => $model,
-            'subjects' => $subjects,
+            'model'                => $model,
+            'subjects'             => $subjects,
             'submittedAssignments' => $submittedAssignments,
         ]);
     }
 
-    public function showStudentAssignment(string $id) {
+    public function showStudentAssignment(string $id)
+    {
 
         $assignment = Assignment::findOrFail($id)->load('subject');
-        
+
         $assignmentDetail = AssignmentDetail::whereBelongsTo($assignment)
             ->whereHas('students', function ($query) {
                 $query->whereBelongsTo(Auth::user());
@@ -201,14 +204,15 @@ class DashboardController extends Controller
             ->first();
 
         return Inertia::render('StudentAssignmentPage', [
-            'assignment' => $assignment,
+            'assignment'       => $assignment,
             'assignmentDetail' => $assignmentDetail,
         ]);
     }
 
-    // actual store page 
+    // actual store page
 
-    public function showCourse(string $id) {
+    public function showCourse(string $id)
+    {
         $model = Course::whereId($id)
             ->with('subjects')
             ->with('subjects.assignments')

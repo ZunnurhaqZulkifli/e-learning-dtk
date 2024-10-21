@@ -3,10 +3,10 @@ import CoursesStats from './Components/CoursesStats';
 import CoursesCatalogue from './DashboardCatalogue';
 import MasterLayout from './MasterLayout';
 
-export default function Dashboard({ user, courses, stats }) {
+export default function Dashboard({ user, courses, stats, images }) {
   return (
     <>
-      <CarouselSlider />
+      <CarouselSlider images={images} />
 
       <MasterLayout>
           <div className='p-4'>

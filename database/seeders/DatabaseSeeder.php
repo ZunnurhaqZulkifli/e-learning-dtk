@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             AssignmentSeeder::class,
             AssignmentDetailSeeder::class,
             SystemLogsSeeder::class,
+            ImageSeeder::class,
             // AttachRoleToUserSeeder::class,
         ]);
     }
