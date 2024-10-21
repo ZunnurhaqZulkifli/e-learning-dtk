@@ -8,13 +8,20 @@
           </div>
             <div class="row d-flex align-items-center justify-content-center">
                 <div class="col-md-8 col-lg-7 col-xl-6">
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-                    class="img-fluid" alt="Sample image">
-
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" class="img-fluid mb-4" alt="Sample image">
                 </div>
                 <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
+
+                        <div class="form-outline mb-4" data-mdb-input-init>
+                            <input class="form-control form-control-lg"
+                                   id="form1Example13"
+                                   name="email"
+                                   type="email" />
+                            <label class="form-label" for="form1Example13">email</label>
+                        </div>
+                        
                         <!-- Email input -->
                         <div class="form-outline mb-4"
                              data-mdb-input-init>
@@ -58,6 +65,8 @@
                                 type="submit">Sign in</button>
 
                     </form>
+
+                    <div class="mt-2">You can either user email / username for logging in the system</div>
                 </div>
             </div>
         </div>

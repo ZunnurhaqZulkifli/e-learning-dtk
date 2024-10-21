@@ -57,12 +57,20 @@ class AuthController extends Controller
 
     public function login(Request $request) {
         $validatedData = $request->validate([
-            'email'    => 'email',
+            'email'    => '',
             'username' => '',
             'password' => 'bail|required|string|min:1',
         ]);
 
-        if (Auth::attempt($validatedData)) {
+        if($request->email != null) {
+            $loginData['email'] = $request->email;
+            $loginData['password'] = $request->password;
+        } else {
+            $loginData['username'] = $request->username;
+            $loginData['password'] = $request->password;
+        }
+
+        if (Auth::attempt($loginData)) {
             $request->session()->regenerate();
 
             $check_if_admin = Auth::user()->hasRole('admin');
