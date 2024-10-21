@@ -92,7 +92,6 @@ class setup extends Command
         $this->warn('Resetting Views...');
         $this->info(' ');
         $this->call('optimize');
-        $this->call('storage:link');
         $this->info(' ');
 
         for($i = 0; $i < 10; $i++) {
