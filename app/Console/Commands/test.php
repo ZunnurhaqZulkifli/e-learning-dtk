@@ -51,10 +51,14 @@ class test extends Command
     public function handle()
     {
         $this->rCommand('php artisan storage:link');
+        $this->rCommand('cd public/storage/');
+        $this->rCommand('mkdir images');
+        $this->rCommand('cd ../../');
+
 
         if (file_exists('./images/banner_01.png')) {
             $this->info('banner 1 ' . file_exists('./images/banner_01.png'));
-            $this->rCommand('copy images\\banner_01.png public\\storage\\images\\');
+            $this->rCommand('copy images/banner_01.png public/storage/images/');
             
             // $this->info('banner 2 ' . file_exists('./images/banner_02.png'));
             // $this->rCommand('copy images\\banner_02.png public\\storage\\images\\');
