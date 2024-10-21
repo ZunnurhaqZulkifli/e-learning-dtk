@@ -92,6 +92,7 @@ class setup extends Command
         $this->warn('Resetting Views...');
         $this->info(' ');
         $this->call('optimize');
+        $this->call('config:clear');
         $this->info(' ');
 
         for($i = 0; $i < 10; $i++) {
