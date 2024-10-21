@@ -49,6 +49,7 @@
 
     @viteReactRefresh
     @vite(['resources/js/app.jsx', 'resources/css/app.css'])
+    @routes
     @inertiaHead
 </head>
 
@@ -108,7 +109,8 @@
                     <button aria-label="Close"
                             class="btn-close"
                             data-bs-dismiss="alert"
-                            type="button"></button>
+                            type="button">
+                    </button>
                 </div>
             </div>
             
