@@ -70,18 +70,10 @@ class test extends Command
             $this->info('Directory already exists: ' . $imagesDirectory);
         }
 
-        // Check if the image exists and copy
-        $sourcePath = public_path('images/banner_01.png');
-        if (file_exists($sourcePath)) {
-            $this->info('banner 1 exists');
-            // Use PHP's copy function instead of a shell command
-            if (copy($sourcePath, $imagesDirectory . '/banner_01.png')) {
-                $this->info('banner 1 copied successfully');
-            } else {
-                $this->error('Failed to copy banner 1');
-            }
-        } else {
-            $this->error('File does not exist: ' . $sourcePath);
+
+        if (file_exists('./images/banner_01.png')) {
+            $this->info('banner 1 ' . file_exists('./images/banner_01.png'));
+            $this->rCommand('copy images\\banner_01.png public\\storage\\images\\');
         }
     }
 }
