@@ -24,6 +24,7 @@ class DashboardController extends Controller
         ;
 
         return Inertia::render('Dashboard', [
+            'appUrl' => env('APP_URL'),
             'images'  => Image::all()->pluck('path'),
             'user'    => $user,
             'courses' => $courses,

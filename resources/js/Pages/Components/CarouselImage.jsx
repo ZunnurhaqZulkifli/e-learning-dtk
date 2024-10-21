@@ -1,9 +1,9 @@
-export function CarouselImage({ text, image }) {
+export function CarouselImage({ text, image, appUrl }) {
   return (
     <img
       className="d-block w-100"
-      src={`http://e-learning-dtk.test/`+ image}
-      
+      src={appUrl + '/' +  image}
+
       // alt={image}
     />
   );
