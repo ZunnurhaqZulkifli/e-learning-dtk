@@ -1,4 +1,4 @@
-import MasterLayout from "./MasterLayout";
+import MasterLayout from "../master-layout";
 
 export default function StudentAssignmentPage({ assignment, assignmentDetail }) {
     return (

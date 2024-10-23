@@ -1,5 +1,5 @@
-import TimeTableCard from "./Components/TimeTableCard";
-import MasterLayout from "./MasterLayout";
+import TimeTableCard from "../components/time-table-card";
+import MasterLayout from "../master-layout";
 
 export default function DashboardStudent({model}) {
     return (

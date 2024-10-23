@@ -77,12 +77,12 @@
             <li class="nav-item">
                 <a aria-current="page"
                    class="nav-link text-white"
-                   href="{{ route('pre_login') }}">Login</a>
+                   href="{{ route('pre-login') }}">Login</a>
             </li>
             <li class="nav-item">
                 <a aria-current="page"
                    class="nav-link text-white"
-                   href="{{ route('pre_register') }}">Register</a>
+                   href="{{ route('pre-register') }}">Register</a>
             </li>
         </ul>
     @endif

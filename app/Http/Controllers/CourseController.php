@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
 use App\Models\Course;
+use Inertia\Inertia;
 
 class CourseController extends Controller
 {
@@ -35,9 +36,19 @@ class CourseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Course $course)
+    public function show(string $id)
     {
-        //
+        $model = Course::whereId($id)
+            ->with('subjects')
+            ->with('subjects.assignments')
+            ->with('subjects.assignments.assignmentDetails')
+            ->with('subjects.assignments.assignmentDetails.students')
+            ->with('teacher')
+            ->get()->first();
+
+        return Inertia::render('Course', [
+            'model' => $model,
+        ]);
     }
 
     /**

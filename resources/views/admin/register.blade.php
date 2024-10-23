@@ -1,4 +1,4 @@
-@extends('layouts.main_app')
+@extends('layouts.main-app')
 
 @section('content')
     <div class="vh-100">

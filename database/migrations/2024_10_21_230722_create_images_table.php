@@ -11,8 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('image_types', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
+        });
+
         Schema::create('images', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('image_type_id')->constrained();
             $table->string('path');
             $table->string('name');
             $table->timestamps();
@@ -24,6 +31,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('image_types');
         Schema::dropIfExists('images');
     }
 };

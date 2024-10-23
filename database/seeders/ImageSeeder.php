@@ -16,6 +16,7 @@ class ImageSeeder extends Seeder
         $images = [
             [
                 'path' => 'images/banner_01.png',
+                'image_type_id' => 1,
                 'name' => 'Banner 1',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -23,6 +24,7 @@ class ImageSeeder extends Seeder
 
             [
                 'path' => 'images/banner_02.png',
+                'image_type_id' => 1,
                 'name' => 'Banner 2',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -30,6 +32,7 @@ class ImageSeeder extends Seeder
 
             [
                 'path' => 'images/banner_03.png',
+                'image_type_id' => 1,
                 'name' => 'banner 3',
                 'created_at' => now(),
                 'updated_at' => now(),

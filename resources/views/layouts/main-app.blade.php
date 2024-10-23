@@ -21,7 +21,7 @@
     <title>E Learning</title>
 </head>
 <body>
-    @include('nav_bar')
+    @include('nav-bar')
 
     <div class="position-relative">
         @yield('content')

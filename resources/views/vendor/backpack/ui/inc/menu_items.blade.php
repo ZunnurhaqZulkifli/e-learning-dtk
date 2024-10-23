@@ -10,3 +10,5 @@
 <x-backpack::menu-item title="Teachers" icon="la la-user" :link="backpack_url('teacher')" />
 <x-backpack::menu-item title="Courses" icon="la la-question" :link="backpack_url('course')" />
 <x-backpack::menu-item title="Subjects" icon="la la-question" :link="backpack_url('subject')" />
+<x-backpack::menu-item title="Images" icon="la la-question" :link="backpack_url('image')" />
+<x-backpack::menu-item title="Images" icon="la la-question" :link="backpack_url('images')" />

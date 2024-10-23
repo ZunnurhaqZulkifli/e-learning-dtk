@@ -1,5 +1,5 @@
-import StatusBadge from "./Components/StatusBadge";
-import MasterLayout from "./MasterLayout";
+import StatusBadge from "../components/status-badge";
+import MasterLayout from "../master-layout";
 
 export default function CourseTeacher({model}) {
     return (

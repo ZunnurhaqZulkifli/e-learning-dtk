@@ -1,12 +1,12 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
-use Illuminate\Support\Facades\Auth;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 
 // public routes
@@ -17,7 +17,7 @@ Route::group(
     function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('/about-us', [DashboardController::class, 'aboutUs'])->name('about-us');
-        Route::get('/course/{id}', [DashboardController::class, 'showCourse'])->name('show-course');
+        Route::get('/course/{id}', [CourseController::class, 'show'])->name('show-course');
     }
 );
 
@@ -27,10 +27,10 @@ Route::group(
         'middleware' => 'auth',
     ],
     function () {
-        Route::get('/dashboard', [DashboardController::class, 'teacherDashboard'])->name('teacher-dashboard');
-        Route::get('/course/{id}', [DashboardController::class, 'teacherShowCourse'])->name('teacher-show-course');
-        Route::get('/subject/{id}', [DashboardController::class, 'teacherShowSubject'])->name('teacher-show-subject');
-        Route::get('/assignment/{id}', [DashboardController::class, 'teacherShowAssginment'])->name('teacher-show-assingment');
+        Route::get('/dashboard', [TeacherController::class, 'dashboard'])->name('teacher-dashboard');
+        Route::get('/course/{id}', [TeacherController::class, 'showCourse'])->name('teacher-show-course');
+        Route::get('/subject/{id}', [TeacherController::class, 'showSubject'])->name('teacher-show-subject');
+        Route::get('/assignment/{id}', [TeacherController::class, 'showAssignment'])->name('teacher-show-assingment');
     }
 );
 
@@ -42,28 +42,22 @@ Route::group(
     function () {
         
         // shwowing the actual student's individual course
-        Route::get('/dashboard', [DashboardController::class, 'studentDashboard'])->name('student-dashboard');
+        Route::get('/dashboard', [StudentController::class, 'dashboard'])->name('student-dashboard');
         
         // shwowing the individual course
-        Route::get('/course/{id}', [DashboardController::class, 'studentShowCourse'])->name('student-show-course');
+        Route::get('/course/{id}', [StudentController::class, 'showCourse'])->name('student-show-course');
 
         // showing all the assignments of the student
-        Route::get('/assignments', [DashboardController::class, 'studentAssingments'])->name('student-assignments');
+        Route::get('/assignments', [StudentController::class, 'assignments'])->name('student-assignments');
 
         // showing the individual assignment
-        Route::get('/assignment/{id}', [DashboardController::class, 'showStudentAssignment'])->name('student-show-assignments');
+        Route::get('/assignment/{id}', [StudentController::class, 'showAssignment'])->name('student-show-assignments');
     }
 );
 
-// Custom login routes
-Route::get('/pre-login', [AuthController::class, 'pre_login'])->name('pre_login');
 
-// Login Route 
+Route::get('/pre-login', [AuthController::class, 'preLogin'])->name('pre-login');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
-
-// Logout Route
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-
-Route::get('/pre-register', [AuthController::class, 'pre_register'])->name('pre_register');
-
+Route::get('/pre-register', [AuthController::class, 'preRegister'])->name('pre-register');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

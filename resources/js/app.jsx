@@ -6,23 +6,22 @@ import { createRoot } from "react-dom/client";
 const appName = import.meta.env.VITE_APP_NAME || "Laravel";
 
 createInertiaApp({
-    id: "app",
+    id: 'app',
     title: (title) => (title ? `${title} / ${appName}` : appName),
     resolve: (name) =>
         resolvePageComponent(
-            `./Pages/${name}.jsx`,
-            import.meta.glob("./Pages/**/*.jsx")
+            `./pages/${name}.jsx`,
+            import.meta.glob('./pages/**/*.jsx')
         ),
     setup({ el, App, props }) {
         createRoot(el).render(
             <LaravelReactI18nProvider
-                locale={"ms_MY"}
-                fallbackLocale={"en"}
-                files={import.meta.glob("/lang/*.json")}
+                locale={'ms_MY'}
+                fallbackLocale={'en'}
+                files={import.meta.glob('/lang/*.json')}
             >
                 <App {...props} />
             </LaravelReactI18nProvider>
         );
     },
-    progress: {},
 });

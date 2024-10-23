@@ -1,5 +1,3 @@
-import MasterLayout from "./MasterLayout";
-
 export default function AssingmentTeacher({model}) {
     return (
         <>

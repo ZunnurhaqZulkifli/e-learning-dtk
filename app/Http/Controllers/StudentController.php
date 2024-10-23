@@ -4,63 +4,111 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
+use App\Models\Assignment;
+use App\Models\AssignmentDetail;
+use App\Models\Course;
 use App\Models\Student;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class StudentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function dashboard()
     {
-        //
+        $model = Student::whereBelongsTo(Auth::user())
+            ->with('courses.subjects')
+            ->with('user')
+            ->get()->first();
+
+        $courses = $model->courses;
+
+        return Inertia::render('students/dashboard', [
+            'model'   => $model,
+            'courses' => $courses,
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    // listing of all the student's enrolled courses
+    public function courses()
     {
-        //
+        $model = Student::whereBelongsTo(Auth::user())
+            ->with('courses')
+            ->get()->first();
+
+        $courses = $model->courses;
+
+        return Inertia::render('students/courses', [
+            'model'   => $model,
+            'courses' => $courses,
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreStudentRequest $request)
+    // individual courses page for students
+    public function showCourse(string $id)
     {
-        //
+
+        $model = Course::whereId($id)
+            ->with('subjects')
+            ->with('subjects.assignments')
+            ->with('subjects.assignments.assignmentDetails')
+            ->with('subjects.assignments.assignmentDetails.students')
+            ->with('teacher')
+            ->get()->first();
+
+        return Inertia::render('students/courses', [
+            'model' => $model,
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Student $student)
+    public function assignments()
     {
-        //
+        // this is all the student's assignments
+        $model = Student::whereBelongsTo(Auth::user())
+            ->with('courses')
+            ->with('courses.subjects')
+            ->with('courses.subjects.assignments')
+            ->get()->first();
+
+        $subjects = [];
+
+        foreach ($model->courses as $course) {
+            foreach ($course->subjects as $subject) {
+                $subjects[] = $subject;
+            }
+        }
+
+        $submittedAssignments = AssignmentDetail::whereHas('students', function ($query) {
+            $query->whereBelongsTo(Auth::user());
+        })->get();
+
+        return Inertia::render('students/assignments', [
+            'model'                => $model,
+            'subjects'             => $subjects,
+            'submittedAssignments' => $submittedAssignments,
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Student $student)
+    public function showAssignment(string $id)
     {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateStudentRequest $request, Student $student)
-    {
-        //
-    }
+        $assignment = Assignment::findOrFail($id)->load('subject');
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Student $student)
-    {
-        //
+        $assignmentDetail = AssignmentDetail::whereBelongsTo($assignment)
+            ->whereHas('students', function ($query) {
+                $query->whereBelongsTo(Auth::user());
+            })
+            ->with('assignment')
+            ->with('teacher')
+            ->with('students')
+            ->get()
+            ->first();
+
+        return Inertia::render('students/assignments-page', [
+            'assignment'       => $assignment,
+            'assignmentDetail' => $assignmentDetail,
+        ]);
     }
 }

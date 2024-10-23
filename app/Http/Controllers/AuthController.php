@@ -10,12 +10,45 @@ use function Symfony\Component\String\b;
 
 class AuthController extends Controller
 {
-    public function pre_login()
+    public function preLogin()
     {
         return view('admin.login');
     }
 
-    public function pre_register() {
+    public function login(Request $request) {
+        $validatedData = $request->validate([
+            'email'    => '',
+            'username' => '',
+            'password' => 'bail|required|string|min:1',
+        ]);
+
+        if($request->email != null) {
+            $loginData['email'] = $request->email;
+            $loginData['password'] = $request->password;
+        } else {
+            $loginData['username'] = $request->username;
+            $loginData['password'] = $request->password;
+        }
+
+        if (Auth::attempt($loginData)) {
+            $request->session()->regenerate();
+
+            $check_if_admin = Auth::user()->hasRole('admin');
+
+            // If the user is an admin, redirect to the admin dashboard
+            if ($check_if_admin) {
+                backpack_auth()->login(Auth::user());
+                return redirect('/admin/dashboard')->with('message', 'login successful');
+            }
+            
+            // If the user is not an admin, redirect to the home dashboard
+            return redirect('/')->with('message', 'login successful');
+        }
+        
+        return redirect('/')->with('message', 'login failed, please check your credentials');
+    }
+
+    public function preRegister() {
         return view('admin.register');
     }
 
@@ -53,39 +86,6 @@ class AuthController extends Controller
 
         Auth::login($user);
         return redirect('/')->with('success', 'Registration successful!');
-}
-
-    public function login(Request $request) {
-        $validatedData = $request->validate([
-            'email'    => '',
-            'username' => '',
-            'password' => 'bail|required|string|min:1',
-        ]);
-
-        if($request->email != null) {
-            $loginData['email'] = $request->email;
-            $loginData['password'] = $request->password;
-        } else {
-            $loginData['username'] = $request->username;
-            $loginData['password'] = $request->password;
-        }
-
-        if (Auth::attempt($loginData)) {
-            $request->session()->regenerate();
-
-            $check_if_admin = Auth::user()->hasRole('admin');
-
-            // If the user is an admin, redirect to the admin dashboard
-            if ($check_if_admin) {
-                backpack_auth()->login(Auth::user());
-                return redirect('/admin/dashboard')->with('message', 'login successful');
-            }
-            
-            // If the user is not an admin, redirect to the home dashboard
-            return redirect('/')->with('message', 'login successful');
-        }
-        
-        return redirect('/')->with('message', 'login failed, please check your credentials');
     }
 
     public function logout(Request $request)

@@ -48,8 +48,8 @@
     <title>E Learning</title>
 
     @viteReactRefresh
-    @vite(['resources/js/app.jsx', 'resources/css/app.css'])
     @routes
+    @vite(['resources/js/app.jsx', 'resources/css/app.css'])
     @inertiaHead
 </head>
 
@@ -86,15 +86,15 @@
 
 <body data-bs-theme="dark"
       smoothScroll>
-    @include('nav_bar')
+    @include('nav-bar')
 
     @if (Auth::check())
         @if (Auth::user()->hasRole('teacher') && request()->segment(1) == 'teacher')
-            @include('nav_bar_teacher')
+            @include('teacher-nav-bar')
         @endif
 
         @if (Auth::user()->hasRole('student'))
-            @include('nav_bar_student')
+            @include('student-nav-bar')
         @endif
     @endif
 

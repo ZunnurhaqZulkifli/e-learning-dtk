@@ -4,69 +4,90 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTeacherRequest;
 use App\Http\Requests\UpdateTeacherRequest;
+use App\Models\Assignment;
+use App\Models\Course;
+use App\Models\Subject;
 use App\Models\Teacher;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class TeacherController extends Controller
 {
-    public function teacherDashboard()
+    public function dashboard()
     {
-        Inertia::render('TeacherDashboard', [
-            'user' => Auth::user(),
+        $model = Teacher::whereBelongsTo(Auth::user())
+            ->with('courses.subjects')
+            ->with('courses.students')
+            ->with('user')
+            ->get()->first();
+
+        $courses = Course::whereBelongsTo($model)->get();
+
+        return Inertia::render('teachers/dashboard', [
+            'model'   => $model,
+            'courses' => $courses,
         ]);
     }
 
-    public function profile()
+    public function showCourse($id)
     {
-        // Inertia::render('Teacher/Profile');
+        $model = Course::whereId($id)
+            ->with('subjects')
+            ->with('students')
+            ->with('teacher')
+            ->get()->first();
+
+        return Inertia::render('teachers/courses', [
+            'model' => $model,
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function showSubject($id)
     {
-        //
+        $model = Subject::whereId($id)
+            ->with('assignments')
+            ->with('assignments.assignmentDetails')
+            ->with('assignments.assignmentDetails.students')
+            ->with('course')
+            ->with('teacher')
+            ->with('students')
+            ->get()
+            ->first();
+
+        return Inertia::render('teachers/subjects', [
+            'model' => $model,
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreTeacherRequest $request)
+    public function showAssignment($id)
     {
-        //
+        $model = Assignment::whereId($id)
+            ->whereHas('subject', function ($query) {
+                $query->whereHas('teacher', function ($query) {
+                    $query->whereBelongsTo(Auth::user());
+                });
+            })
+            ->with('assignmentDetails')
+            ->with('assignmentDetails.students')
+            ->with('assignmentStudents')
+            ->with('subject')
+            ->with('subject.teacher')
+            ->get()
+            ->first();
+
+        // if(isset($model)) {
+        //     $model['assignments'] = AssignmentDetail::whereAssignmentId($model->id)
+        //         ->with('assignment')
+        //         ->where('is_graded', false)
+        //         ->with('students')
+        //         ->get();
+        // }
+
+        // dd($model);
+
+        return Inertia::render('teachers/assignments', [
+            'model' => $model,
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Teacher $teacher)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Teacher $teacher)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateTeacherRequest $request, Teacher $teacher)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Teacher $teacher)
-    {
-        //
-    }
 }

@@ -1,9 +1,22 @@
-import CarouselSlider from './Components/Carousel';
-import CoursesStats from './Components/CoursesStats';
-import CoursesCatalogue from './DashboardCatalogue';
-import MasterLayout from './MasterLayout';
+import CarouselSlider from '../components/carousel';
+import CoursesStats from '../components/courses-stats';
+import CoursesCatalogue from './dashboard-catalogue';
+import MasterLayout from '../master-layout';
 
-export default function Dashboard({ user, courses, stats, images, appUrl }) {
+export default function Dashboard({ user, courses, stats, images, appUrl, userRoles }) {
+  
+  function renderView(userRoles) {
+    switch(userRoles[0]) {
+      case 'student':
+        return 'student';
+      case 'teacher':
+        return 'teacher';
+      case 'admin':
+        return 'admin';
+      default:
+        return 'guest';
+  }}
+
   return (
     <>
       <CarouselSlider images={images} appUrl={appUrl} />
@@ -26,6 +39,9 @@ export default function Dashboard({ user, courses, stats, images, appUrl }) {
               ) : (
                 <>
                   <div className="p-4">
+                    {
+                      renderView(userRoles)
+                    }
                     <CoursesStats stats={stats} />
                   </div>
                 </>

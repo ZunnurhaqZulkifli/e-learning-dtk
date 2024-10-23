@@ -1,8 +1,7 @@
 import ReactPlayer from "react-player";
-import StatusBadge from "./Components/StatusBadge";
-import SubjectList from "./Components/SubjectList";
-import MasterLayout from "./MasterLayout";
-import AssingmentTeacher from "./TeacherAssignment";
+import StatusBadge from "../components/status-badge";
+import SubjectList from "../components/subject-list";
+import MasterLayout from "../master-layout";
 
 export default function SubjectTeacher({model}) {
     return (
