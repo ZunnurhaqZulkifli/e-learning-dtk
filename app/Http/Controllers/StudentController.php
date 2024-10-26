@@ -7,7 +7,9 @@ use App\Http\Requests\UpdateStudentRequest;
 use App\Models\Assignment;
 use App\Models\AssignmentDetail;
 use App\Models\Course;
+use App\Models\Note;
 use App\Models\Student;
+use App\Models\Subject;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -53,13 +55,51 @@ class StudentController extends Controller
         $model = Course::whereId($id)
             ->with('subjects')
             ->with('subjects.assignments')
-            ->with('subjects.assignments.assignmentDetails')
-            ->with('subjects.assignments.assignmentDetails.students')
+            // ->with('subjects.assignments.assignmentDetails')
+            // ->with('subjects.assignments.assignmentDetails.students')
             ->with('teacher')
             ->get()->first();
 
         return Inertia::render('students/courses', [
             'model' => $model,
+        ]);
+    }
+
+    public function showSubject(string $id)
+    {
+        $totalMarks = 0;
+
+        $model = Subject::whereId($id)
+            ->with('assignments')
+            ->with('teacher')
+            ->get()->first();
+
+        $notes = Note::where('subject_id', $id)
+            ->where('student_id', Auth::user()->id)
+            ->get();
+        
+        $model['notes'] = $notes;
+        $totalMarks += count($notes) * 2;
+        
+        foreach($model->assignments as $assignment) {
+            $assignmentDetail[$assignment->id] = AssignmentDetail::where('assignment_id', $assignment->id)
+                ->whereHas('students', function ($query) {
+                    $query->where('assignment_details.name', Auth::user()->name);
+                })->get()->toArray();
+            
+            $totalMarks += $assignmentDetail[$assignment->id][0]['marks'] ?? 0;
+            $model['total_marks'] = $totalMarks;
+        }
+
+        if ($model->assignments->count() > 0) {
+            foreach ($model->assignments as $assignment) {
+                $assignment->assignmentDetail = $assignmentDetail[$assignment->id] ?? [];
+            }
+        }
+
+        return Inertia::render('students/subjects', [
+            'model' => $model,
+            'student' => Auth::user(),
         ]);
     }
 
@@ -97,15 +137,13 @@ class StudentController extends Controller
         $assignment = Assignment::findOrFail($id)->load('subject');
 
         $assignmentDetail = AssignmentDetail::whereBelongsTo($assignment)
-            ->whereHas('students', function ($query) {
-                $query->whereBelongsTo(Auth::user());
-            })
+            ->where('name', Auth::user()->name)
             ->with('assignment')
             ->with('teacher')
-            ->with('students')
             ->get()
             ->first();
-
+        
+        // dd($assignmentDetail);
         return Inertia::render('students/assignments-page', [
             'assignment'       => $assignment,
             'assignmentDetail' => $assignmentDetail,

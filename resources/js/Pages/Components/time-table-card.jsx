@@ -31,33 +31,27 @@ export default function TimeTableCard() {
     };
 
     return (
-        <>
-            <div className="card mb-4">
-                <div className="card-body">
-                    <h5 className="card-title">My Time Table</h5>
-                    <div className="row col-12 justify-content-center d-flex">
-                        {days.map((dayObj, index) => {
-                            const day = Object.keys(dayObj)[0];
-                            return (
-                                <div
-                                    className={`m-2 card col-2 text-center ${selected === day ? 'bg-info' : ''}`}
-                                    style={{ 
-                                        width: "50px",
-                                        height: "50px",
-                                        display: "flex",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                    }}
-                                    key={index}
-                                    onClick={() => updateClick(day)}
-                                >
-                                    {day}
-                                </div>
-                            );
-                        })}
+        <div className="row justify-content-start">
+            <h4 className=''>My Time Table</h4>
+            {days.map((dayObj, index) => {
+                const day = Object.keys(dayObj)[0];
+                return (
+                    <div
+                        className={`m-2 card col-2 text-center ${selected === day ? 'bg-info' : ''}`}
+                        style={{
+                            width: "60px",
+                            height: "60px",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                        }}
+                        key={index}
+                        onClick={() => updateClick(day)}
+                    >
+                        {day}
                     </div>
-                </div>
-            </div>
-        </>
+                );
+            })}
+        </div>
     );
 }

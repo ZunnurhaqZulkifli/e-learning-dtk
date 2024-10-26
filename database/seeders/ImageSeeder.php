@@ -37,6 +37,38 @@ class ImageSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+
+            [
+                'path' => 'images/server_managemenr.png',
+                'image_type_id' => 2,
+                'name' => 'course 1',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+
+            [
+                'path' => 'images/network_security.png',
+                'image_type_id' => 2,
+                'name' => 'course 2',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+
+            [
+                'path' => 'images/database_design.png',
+                'image_type_id' => 2,
+                'name' => 'course 3',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+
+            [
+                'path' => 'images/web_development.png',
+                'image_type_id' => 2,
+                'name' => 'course 4',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ];
 
         foreach ($images as $image) {

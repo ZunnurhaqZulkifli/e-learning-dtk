@@ -13,6 +13,13 @@ class Assignment extends Model
         'id',
     ];
 
+    protected $casts = [
+        'start_date' => 'datetime:Y-m-d',
+        'due_date'   => 'datetime:Y-m-d',
+        'created_at' => 'datetime:Y-m-d',
+        'updated_at' => 'datetime:Y-m-d',
+    ];
+
     public function subject()
     {
         return $this->belongsTo(Subject::class);

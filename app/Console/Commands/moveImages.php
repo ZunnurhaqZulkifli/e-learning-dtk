@@ -67,14 +67,26 @@ class moveImages extends Command
         }
 
         if (file_exists('./images/banner_01.png')) {
-            $this->info('banner 1 ' . file_exists('./images/banner_01.png'));
-            $this->rCommand('copy images\\banner_01.png public\\storage\\images\\');
+            // $this->info('banner 1 ' . file_exists('./images/banner_01.png'));
+            // $this->rCommand('copy images\\banner_01.png public\\storage\\images\\');
             
-            $this->info('banner 2 ' . file_exists('./images/banner_02.png'));
-            $this->rCommand('copy images\\banner_02.png public\\storage\\images\\');
+            // $this->info('banner 2 ' . file_exists('./images/banner_02.png'));
+            // $this->rCommand('copy images\\banner_02.png public\\storage\\images\\');
 
-            $this->info('banner 3 ' . file_exists('./images/banner_03.png'));
-            $this->rCommand('copy images\\banner_03.png public\\storage\\images\\');
+            // $this->info('banner 3 ' . file_exists('./images/banner_03.png'));
+            // $this->rCommand('copy images\\banner_03.png public\\storage\\images\\');
+
+            $this->info('banner 4 ' . file_exists('./images/server_managemenr.png'));
+            $this->rCommand('copy images\\server_managemenr.png public\\storage\\images\\');
+
+            $this->info('banner 5 ' . file_exists('./images/network_security.png'));
+            $this->rCommand('copy images\\network_security.png public\\storage\\images\\');
+
+            $this->info('banner 6 ' . file_exists('./images/database_design.png'));
+            $this->rCommand('copy images\\database_design.png public\\storage\\images\\');
+
+            $this->info('banner 7 ' . file_exists('./images/web_development.png'));
+            $this->rCommand('copy images\\web_development.png public\\storage\\images\\');
 
             $this->info('Images moved successfully');
         } else {

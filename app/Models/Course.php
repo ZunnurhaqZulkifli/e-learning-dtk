@@ -15,6 +15,11 @@ class Course extends Model
         'id',
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d',
+        'updated_at' => 'datetime:Y-m-d',
+    ];
+
     public function subjectCount() {
         // return $this->hasMany(Subject::class)->count();
     }

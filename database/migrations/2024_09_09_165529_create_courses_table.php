@@ -16,8 +16,9 @@ return new class extends Migration
             $table->unsignedBigInteger('teacher_id')->nullable()->constrained('teachers')->onDelete('cascade');
             $table->string('name');
             $table->string('code');
+            $table->string('image')->nullable();
+            $table->decimal('price', 12,2)->default(0.00);
             $table->string('description')->nullable();
-            $table->integer('total_marks')->default(0);
             $table->string('status')->default('active');
             $table->timestamps();
         });

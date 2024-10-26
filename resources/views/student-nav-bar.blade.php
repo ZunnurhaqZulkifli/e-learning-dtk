@@ -38,6 +38,13 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::routeIs('store-courses') ? 'text-primary' : 'text-dark' }}"
+                       href="{{ route('store-courses') }}">
+                       Courses
+                    </a>
+                </li>
+
                 {{-- <li class="nav-item">
                     <a class="nav-link {{ Request::routeIs('student-show-course') ? 'text-primary' : 'text-dark' }}"
                        href="{{ route('student-dashboard') }}">

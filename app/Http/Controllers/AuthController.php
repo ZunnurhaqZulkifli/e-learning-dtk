@@ -10,12 +10,12 @@ use function Symfony\Component\String\b;
 
 class AuthController extends Controller
 {
-    public function preLogin()
-    {
+    public function login() {
         return view('admin.login');
     }
-
-    public function login(Request $request) {
+    
+    public function doLogin(Request $request)
+    {
         $validatedData = $request->validate([
             'email'    => '',
             'username' => '',

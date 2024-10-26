@@ -77,7 +77,7 @@
             <li class="nav-item">
                 <a aria-current="page"
                    class="nav-link text-white"
-                   href="{{ route('pre-login') }}">Login</a>
+                   href="{{ route('login') }}">Login</a>
             </li>
             <li class="nav-item">
                 <a aria-current="page"

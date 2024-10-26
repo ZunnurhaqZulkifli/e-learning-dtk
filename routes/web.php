@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\NoteController;
+use App\Http\Controllers\StoreController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
@@ -47,17 +49,34 @@ Route::group(
         // shwowing the individual course
         Route::get('/course/{id}', [StudentController::class, 'showCourse'])->name('student-show-course');
 
+        // showing all the subjects of the student
+        Route::get('/subject/{id}', [StudentController::class, 'showSubject'])->name('student-show-subject');
+
         // showing all the assignments of the student
         Route::get('/assignments', [StudentController::class, 'assignments'])->name('student-assignments');
 
         // showing the individual assignment
         Route::get('/assignment/{id}', [StudentController::class, 'showAssignment'])->name('student-show-assignments');
+
+        // saving notes
+        Route::get('/notes/{id}', [NoteController::class, 'store'])->name('notes-store');
     }
 );
 
 
-Route::get('/pre-login', [AuthController::class, 'preLogin'])->name('pre-login');
-Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::group(
+    [
+        'prefix' => '/store',
+        'middleware' => HandlePrecognitiveRequests::class,
+    ], function() {
+    Route::get('/index', [StoreController::class, 'index'])->name('store-courses');
+    Route::get('/preview/{course_id}', [StoreController::class, 'show'])->name('store-show-course');
+    Route::get('/buy/{course_id}', [StoreController::class, 'buy'])->name('store-purchase-course');
+});
+
+
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/do-login', [AuthController::class, 'doLogin'])->name('do-login');
 Route::get('/pre-register', [AuthController::class, 'preRegister'])->name('pre-register');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

@@ -82,6 +82,19 @@
     .badge {
         border-radius: 2px
     }
+    .fs-7 {
+        font-size: 0.75rem
+    }
+    .title {
+        font-size: 2.10rem
+    }
+
+    .card-title {
+        font-size: 1.10rem
+    }
+    .card-text {
+        font-size: 0.75rem
+    }
 </style>
 
 <body data-bs-theme="dark"

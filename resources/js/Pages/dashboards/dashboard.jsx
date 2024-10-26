@@ -34,7 +34,7 @@ export default function Dashboard({ user, courses, stats, images, appUrl, userRo
           {
               (user == null) ? (
                 <div className='p-4'>
-                  <CoursesCatalogue courses={courses} />
+                  <CoursesCatalogue courses={courses} appUrl={appUrl}/>
                 </div>
               ) : (
                 <>

@@ -11,7 +11,7 @@
                   <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" class="img-fluid mb-4" alt="Sample image">
                 </div>
                 <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('do-login') }}">
                         @csrf
 
                         <div class="form-outline mb-4" data-mdb-input-init>
