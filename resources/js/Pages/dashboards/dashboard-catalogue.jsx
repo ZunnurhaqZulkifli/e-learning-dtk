@@ -73,7 +73,7 @@ export default function CourseCatalogue({ courses = [], isListing, appUrl }) {
                                 {
                                     course.image ? (
                                         <>
-                                            {appUrl + '/' +  course.image}
+                                            {/* {appUrl + '/' +  course.image} */}
                                             <img src={appUrl + '/' +  course.image} className="p-2" alt="" />
                                         </>
                                     ) : (

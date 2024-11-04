@@ -12,7 +12,7 @@ class setup extends Command
      *
      * @var string
      */
-    protected $signature = 'app:start';
+    protected $signature = 'app:start {seed?}';
 
     /**
      * The console command description.
@@ -56,6 +56,8 @@ class setup extends Command
 
     public function handle()
     {
+        $seed = $this->argument('seed') == 'seed' ? true : false;
+
         $progress = $this->output->createProgressBar(100);
         $this->info(' ');
         $this->info('Starting the application startup process...');
@@ -75,19 +77,23 @@ class setup extends Command
             return;
         }
 
-        $this->info(' ');
-        $this->warn('Auto Resetting Database...');
-        $this->call('db:wipe');
-        
-        $this->info(' ');
-        $this->info('Auto Migrating Database...');
-        $this->info(' ');
-        $this->call('migrate:fresh');
-        
-        $this->info('Auto Seed Database...');
-        $this->info(' ');
-        $this->call('db:seed');
-        $this->info(' ');
+        if($seed) {
+            $this->info(' ');
+            $this->warn('Auto Resetting Database...');
+            $this->call('db:wipe');
+            
+            $this->info(' ');
+            $this->info('Auto Migrating Database...');
+            $this->info(' ');
+            $this->call('migrate:fresh');
+            
+            $this->info('Auto Seed Database...');
+            $this->info(' ');
+            $this->call('db:seed');
+            $this->info(' ');
+        } else {
+            $this->warn('Skipping Database Reset...');
+        }
 
         $this->warn('Resetting Views...');
         $this->info(' ');
@@ -121,7 +127,7 @@ class setup extends Command
         $this->info('Installing NPM dependencies...');
         $this->info(' ');
 
-        $npmInstallStatus = $this->rCommand('npm install -f');
+        $npmInstallStatus = $this->rCommand('npm install');
         $progress->advance(70);
         if ($npmInstallStatus !== 0) {
             $this->info(' ');
@@ -136,7 +142,7 @@ class setup extends Command
         $this->info(' ');
         $runNpmInstall = $this->rCommand('npm install');
         $runNpmFix = $this->rCommand('npm audit fix');
-        $npmBuildStatus = $this->rCommand('npm run dev -f');
+        $npmBuildStatus = $this->rCommand('npm run dev');
 
         if ($npmBuildStatus !== 0) {
             $this->info(' ');
