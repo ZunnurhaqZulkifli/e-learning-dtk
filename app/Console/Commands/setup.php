@@ -140,8 +140,8 @@ class setup extends Command
         $this->info('Building assets with NPM...');
         
         $this->info(' ');
-        $runNpmInstall = $this->rCommand('npm install');
-        $runNpmFix = $this->rCommand('npm audit fix');
+        $runNpmInstall = $this->rCommand('npm install --force');
+        $runNpmFix = $this->rCommand('npm audit fix --force');
         $npmBuildStatus = $this->rCommand('npm run dev');
 
         if ($npmBuildStatus !== 0) {
