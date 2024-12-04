@@ -62,15 +62,13 @@ class initialize extends Command
 
         // Pulling the latest changes from the repository
         $this->info(' ');
-        $this->info('Pulling Changes...');
+        $this->info('Stashing Changes...');
         $this->info(' ');
-        $npmInstallStatus = $this->rCommand('git pull');
 
-        if ($npmInstallStatus !== 0) {
-            $this->info(' ');
-            $this->error('Git pull failed!, contanct the administrator');
-            return;
-        }
+        $this->rCommand('rm -rf node_modules');
+        $this->rCommand('rm -rf package-lock.json');
+
+        $this->rCommand('git add .');
 
         $this->info('Installing Updates...');
 
@@ -78,6 +76,9 @@ class initialize extends Command
             $progress->advance(1);
             usleep(25000);
         }
+
+        $this->rCommand('git stash');
+        usleep(25000);
 
         exec('composer install', $output, $returnVar);
         $progress->advance(10);
