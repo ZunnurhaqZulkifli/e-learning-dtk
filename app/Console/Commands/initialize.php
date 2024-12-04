@@ -60,15 +60,19 @@ class initialize extends Command
 
         $progress->start();
 
+        $this->rCommand('git add .');
+
         // Pulling the latest changes from the repository
         $this->info(' ');
         $this->info('Stashing Changes...');
         $this->info(' ');
 
-        $this->rCommand('rm -rf node_modules');
-        $this->rCommand('rm -rf package-lock.json');
 
-        $this->rCommand('git add .');
+        usleep(2000);
+        $this->rCommand('git stash');
+
+        $this->rCommand('rmdir node_modules');
+        $this->rCommand('rmdir package-lock.json');
 
         $this->info('Installing Updates...');
 
@@ -77,8 +81,8 @@ class initialize extends Command
             usleep(25000);
         }
 
-        $this->rCommand('git stash');
-        usleep(25000);
+        $this->rCommand('git git pull');
+        usleep(2000);
 
         exec('composer install', $output, $returnVar);
         $progress->advance(10);
