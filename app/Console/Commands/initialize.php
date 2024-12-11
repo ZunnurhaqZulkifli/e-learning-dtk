@@ -81,7 +81,7 @@ class initialize extends Command
             usleep(25000);
         }
 
-        $this->rCommand('git git pull');
+        $this->rCommand('git pull');
         usleep(2000);
 
         exec('composer install', $output, $returnVar);
@@ -91,6 +91,11 @@ class initialize extends Command
             $this->error('Composer installation failed!');
             return;
         }
+
+        $this->rCommand('git stash pop');
+
+
+        $this->rCommand('php artisan serve --port=8000 --host=127.0.0.1');
 
         $progress->finish();
 

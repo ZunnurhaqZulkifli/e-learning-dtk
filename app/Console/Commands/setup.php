@@ -103,24 +103,24 @@ class setup extends Command
 
         for($i = 0; $i < 10; $i++) {
             $progress->advance($i);
-            sleep(1);
+            sleep(0.1);
         }
 
         $this->info(' ');
         $this->info('Starting Valet dependencies...');
         $this->info(' ');
 
-        exec('valet start', $output, $valetStartupStatus);
-        if ($valetStartupStatus !== 0) {
-            $this->info(' ');
-            $this->error('Valet Startup failed!');
-            return;
-        }
+        // exec('valet start', $output, $valetStartupStatus);
+        // if ($valetStartupStatus !== 0) {
+        //     $this->info(' ');
+        //     $this->error('Valet Startup failed!');
+        //     return;
+        // }
 
-        for($i = 0; $i < 20; $i++) {
-            $progress->advance($i);
-            sleep(1);
-        }
+        // for($i = 0; $i < 20; $i++) {
+        //     $progress->advance($i);
+        //     sleep(1);
+        // }
 
         // Installing NPM dependencies
         $this->info(' ');
@@ -140,8 +140,6 @@ class setup extends Command
         $this->info('Building assets with NPM...');
         
         $this->info(' ');
-        $runNpmInstall = $this->rCommand('npm install --force');
-        $runNpmFix = $this->rCommand('npm audit fix --force');
         $npmBuildStatus = $this->rCommand('npm run dev');
 
         if ($npmBuildStatus !== 0) {
