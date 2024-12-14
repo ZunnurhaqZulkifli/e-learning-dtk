@@ -1,11 +1,15 @@
 export function CarouselImage({ text, image, appUrl }) {
   return (
-    <img
-      className="d-block w-100"
-      src={appUrl + '/' +  image}
-
-      // alt={image}
-    />
+    <div>
+      <img
+        className="d-block w-100"
+        src={appUrl + '/' +  image}
+        // alt={image}
+      />
+      <a href="" className="">
+        {appUrl + '/' +  image}
+      </a>
+    </div>
   );
 }
 

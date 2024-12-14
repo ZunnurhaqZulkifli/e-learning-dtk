@@ -24,10 +24,6 @@ export default function CourseCatalogue({ courses = [], isListing, appUrl }) {
                 Welcome to the course catalogue. You can browse through the available courses and subjects.
             </h6>
 
-            <div className="mb-2">
-                {/* <h3 className="card-title">Courses</h3> */}
-            </div>
-
             {
                 !isListing ? (
                     <>
@@ -59,6 +55,9 @@ export default function CourseCatalogue({ courses = [], isListing, appUrl }) {
                 {
                     updatedCourses.data.map((course, index) => (
                         <div className="col-6" key={index}>
+                            <a href="" className="">
+                                {appUrl + '/' +  course.image}
+                            </a>
                             <div className="card mt-2 h-100" style={
                                 {
                                     borderRadius: "0px",

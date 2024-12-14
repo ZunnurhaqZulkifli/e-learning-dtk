@@ -22,8 +22,10 @@ class DashboardController extends Controller
             ->paginate(4)
         ;
 
+        dd(env('APP_URL'));
+
         return Inertia::render('dashboards/dashboard', [
-            'appUrl' => env('APP_URL'),
+            'appUrl' => 'https://e-learning-dtk.ngrok.app',
             'images'  => Image::where('image_type_id', 1)->pluck('path'),
             'user'    => $user,
             'userRoles' => $userRoles ?? null,

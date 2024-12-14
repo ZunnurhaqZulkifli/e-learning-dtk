@@ -5,9 +5,9 @@ function CarouselSlider({ images, appUrl }) {
   return (
     <Carousel fade>
       {
-        (images) ? images.map((image, index) => (
+        images ? images.map((image, index) => (
           <Carousel.Item key={index}>
-            <CarouselImage text="First slide" appUrl={appUrl} image={ image }/>
+            <CarouselImage text="First slide" appUrl={appUrl} image={image} />
           </Carousel.Item>
         )) : null
       }

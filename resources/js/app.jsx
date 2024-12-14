@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.css';
 import { createInertiaApp } from "@inertiajs/react";
 import { LaravelReactI18nProvider } from "laravel-react-i18n";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";

@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import MasterLayout from '../master-layout';
 import CourseCatalogue from '../dashboards/dashboard-catalogue';
 
