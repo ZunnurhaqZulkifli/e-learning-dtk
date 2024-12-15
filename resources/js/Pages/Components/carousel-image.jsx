@@ -6,9 +6,9 @@ export function CarouselImage({ text, image, appUrl }) {
         src={appUrl + '/' +  image}
         // alt={image}
       />
-      <a href="" className="">
+      {/* <a href="" className="">
         {appUrl + '/' +  image}
-      </a>
+      </a> */}
     </div>
   );
 }

@@ -55,9 +55,9 @@ export default function CourseCatalogue({ courses = [], isListing, appUrl }) {
                 {
                     updatedCourses.data.map((course, index) => (
                         <div className="col-6" key={index}>
-                            <a href="" className="">
+                            {/* <a href="" className="">
                                 {appUrl + '/' +  course.image}
-                            </a>
+                            </a> */}
                             <div className="card mt-2 h-100" style={
                                 {
                                     borderRadius: "0px",
